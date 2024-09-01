@@ -3,56 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Myfitegre Technologies LLC</title>
+    <title>Myfitegre Technologies LLC - Home</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
             text-align: center;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f8ff;
         }
-        h1 {
-            color: #4a90e2;
-            margin-top: 20px;
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 8px 16px;
         }
-        .container {
-            width: 80%;
-            margin: 0 auto;
+        .active {
+            background-color: #4CAF50;
+            border-radius: 4px;
         }
-        .plant {
-            display: inline-block;
-            margin: 20px;
-            width: 30%;
-            text-align: left;
+        .offerings {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
         }
-        .plant img {
-            width: 100%;
+        .offering {
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        .offering:hover {
+            transform: scale(1.05);
+        }
+        .offering img {
+            width: 200px;
             height: auto;
-        }
-        .description {
-            margin-top: 10px;
-            color: #333;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Myfitegre Technologies LLC</h1>
-        
-        <div class="plant">
-            <img src="https://via.placeholder.com/300x200?text=Plant+1" alt="Plant 1">
-            <div class="description">
-                <p>Plant 1 is like a unicorn in a forest of greenery. Just as unicorns are known for their magical qualities, this plant thrives with an almost mystical charm. It symbolizes the rarity and beauty of the enchanted world, where nature's magic meets technological innovation.</p>
-            </div>
-        </div>
 
-        <div class="plant">
-            <img src="https://via.placeholder.com/300x200?text=Plant+2" alt="Plant 2">
-            <div class="description">
-                <p>Plant 2 is a reminder of the whimsical logic that governs our world. Much like unicorns that are a blend of fantasy and reality, this plant represents the harmonious balance between natural beauty and the endless possibilities that technology brings to life.</p>
-            </div>
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="buynow.html">Buy Now</a>
+        <a href="about.html">About</a>
+        <a href="learn.html">Learn More</a>
+    </nav>
+
+    <h1>Welcome to Myfitegre Technologies LLC</h1>
+
+    <section class="offerings">
+        <div class="offering">
+            <img src="nova.jpg" alt="Nova PC">
+            <h3>Nova</h3>
         </div>
-    </div>
+        <div class="offering">
+            <img src="siren.jpg" alt="Siren PC">
+            <h3>Siren</h3>
+        </div>
+        <div class="offering">
+            <img src="apocalypse.jpg" alt="Apocalypse PC">
+            <h3>Apocalypse</h3>
+        </div>
+    </section>
+
 </body>
 </html>
