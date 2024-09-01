@@ -9,6 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
         }
         nav {
             background-color: #333;
@@ -30,35 +31,27 @@
         }
         .content-block {
             text-align: center;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            margin: 10px;
-            border-radius: 8px;
-            transition: transform 0.3s;
-            max-width: 800px;
+            background-color: white;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+            padding: 30px;
             margin: 20px auto;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            max-width: 800px;
             box-sizing: border-box;
+        }
+        .content-block:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.35);
         }
         .content-block h2 {
             color: #333;
-            margin: 0;
+            margin-bottom: 20px;
         }
         .content-block p {
             color: #555;
-            line-height: 1.6;
+            line-height: 1.8;
             margin: 0;
-            text-align: center;
-        }
-        .content-block:hover {
-            transform: scale(1.02);
-        }
-        .divider {
-            width: 100%;
-            max-width: 800px;
-            margin: 20px auto;
-            border-top: 3px dashed purple;
-            border-bottom: 3px dashed green;
-            height: 20px;
         }
     </style>
 </head>
@@ -79,8 +72,6 @@
         </p>
     </div>
     
-    <div class="divider"></div>
-    
     <div class="content-block">
         <h2>What are you getting?</h2>
         <p>
@@ -95,8 +86,6 @@
         </p>
     </div>
     
-    <div class="divider"></div>
-    
     <div class="content-block">
         <h2>Optimized Systems</h2>
         <p>
@@ -106,8 +95,6 @@
         </p>
     </div>
     
-    <div class="divider"></div>
-    
     <div class="content-block">
         <h2>Reliability</h2>
         <p>
@@ -116,8 +103,6 @@
         </p>
     </div>
     
-    <div class="divider"></div>
-    
     <div class="content-block">
         <h2>Delivery</h2>
         <p>
@@ -125,8 +110,6 @@
             No extra fee required.
         </p>
     </div>
-    
-    <div class="divider"></div>
     
     <div class="content-block">
         <h2>Myfitegre</h2>
