@@ -3,21 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Myfitegre</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Myfitegre Technologies LLC - About</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 12px;
+            display: inline-block;
+            font-size: 14px;
+        }
+        .active {
+            background-color: #4CAF50;
+            border-radius: 4px;
+        }
+        .content-block {
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+            max-width: 800px;
+            margin: 20px auto;
+            box-sizing: border-box;
+        }
+        .content-block h2 {
+            color: #333;
+            margin: 0;
+        }
+        .content-block p {
+            color: #555;
+            line-height: 1.6;
+            margin: 0;
+            text-align: center;
+        }
+        .content-block:hover {
+            transform: scale(1.02);
+        }
+        .divider {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            border-top: 3px dashed purple;
+            border-bottom: 3px dashed green;
+            height: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul class="nav-list">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="about.html" class="active">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="buynow.html">Buy Now</a>
+        <a href="about.html" class="active">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
 
     <div class="content-block">
         <h2>Mission Statement</h2>
@@ -85,5 +137,6 @@
             This project is heavily influenced by AI; we're using it to achieve maximum efficiency in our operations.
         </p>
     </div>
+
 </body>
 </html>
