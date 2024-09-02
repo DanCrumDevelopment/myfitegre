@@ -80,18 +80,15 @@
             margin-top: 10px;
             text-align: center;
         }
-        .hidden {
-            display: none;
-        }
         #total {
             margin-top: 20px;
             font-size: 20px;
             font-weight: bold;
-            display: none; /* Hidden initially */
+            display: block; /* Always visible */
         }
         #paypal-container-T7X56RD3LX9DW {
             margin-top: 20px;
-            display: none; /* Hidden initially */
+            display: block; /* Always visible after RAM selection */
         }
     </style>
     <!-- PayPal SDK Script -->
@@ -168,13 +165,12 @@
                 radio.addEventListener('change', () => calculateTotal());
             });
 
-            // Show total, confirmation, and PayPal button after RAM selection
+            // Show total and PayPal button after RAM selection
             const ramRadios = document.querySelectorAll('input[name="add_ram"]');
             ramRadios.forEach(radio => {
                 radio.addEventListener('change', () => {
-                    document.getElementById('total').classList.remove('hidden');
-                    document.getElementById('confirmation-section').classList.remove('hidden');
-                    document.getElementById('paypal-container-T7X56RD3LX9DW').classList.remove('hidden');
+                    document.getElementById('total').style.display = "block";
+                    document.getElementById('paypal-container-T7X56RD3LX9DW').style.display = "block";
                 });
             });
         }
@@ -206,6 +202,7 @@
         <div style="text-align:center;">
             <img src="docs/assets/images/customize.jpeg" alt="Customize Your Nova" class="customize">
         </div>
+        <div id="total"></div>
         <form id="purchase-form" action="https://formspree.io/f/xovabazk" method="POST" onsubmit="return validatePrice()">
             <div class="form-group">
                 <label>Select NVME Size:</label>
@@ -247,15 +244,13 @@
                 <input type="radio" name="add_ram" value="no"> No<br>
             </div>
 
-            <div id="total" class="hidden"></div>
-
-            <div id="confirmation-section" class="hidden">
+            <div class="form-group">
                 <label for="entered-price">Now rewrite your total here to confirm price:</label>
                 <input type="number" id="entered-price" name="entered_price" required>
             </div>
 
             <!-- PayPal Button Container -->
-            <div id="paypal-container-T7X56RD3LX9DW" class="hidden"></div>
+            <div id="paypal-container-T7X56RD3LX9DW"></div>
         </form>
     </div>
 
