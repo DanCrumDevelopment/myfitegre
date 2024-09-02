@@ -151,11 +151,6 @@
 
             // Display the final total
             document.getElementById('total').innerText = "Total: $" + total.toFixed(2) + " - Total Including Delivery and Tax";
-
-            // Show the total and the PayPal button after selecting RAM option
-            document.getElementById('total').classList.remove('hidden');
-            document.getElementById('confirmation-section').style.display = "block";
-            document.getElementById('paypal-container-T7X56RD3LX9DW').style.display = "block";
         }
 
         function showNext(id, condition) {
@@ -171,6 +166,16 @@
         function initialize() {
             document.querySelectorAll('input[type="radio"]').forEach(radio => {
                 radio.addEventListener('change', () => calculateTotal());
+            });
+
+            // Show total, confirmation, and PayPal button after RAM selection
+            const ramRadios = document.querySelectorAll('input[name="add_ram"]');
+            ramRadios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    document.getElementById('total').classList.remove('hidden');
+                    document.getElementById('confirmation-section').style.display = "block";
+                    document.getElementById('paypal-container-T7X56RD3LX9DW').style.display = "block";
+                });
             });
         }
 
@@ -236,13 +241,13 @@
 
             <div id="ram" class="form-group hidden">
                 <label>Add 16GB more Ram?</label>
-                <input type="radio" name="add_ram" value="yes" onclick="calculateTotal()"> Yes<br>
-                <input type="radio" name="add_ram" value="no" onclick="calculateTotal()"> No<br>
+                <input type="radio" name="add_ram" value="yes"> Yes<br>
+                <input type="radio" name="add_ram" value="no"> No<br>
             </div>
 
             <div id="total" class="hidden"></div>
 
-            <div id="confirmation-section" class="form-group">
+            <div id="confirmation-section" class="form-group hidden">
                 <label for="entered-price">Now rewrite your total here to confirm price:</label>
                 <input type="number" id="entered-price" name="entered_price" required>
             </div>
