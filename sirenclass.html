@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siren - Myfitegre Technologies LLC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 12px;
+            display: inline-block;
+            font-size: 14px;
+        }
+        .active {
+            background-color: #4CAF50;
+            border-radius: 4px;
+        }
+        .content {
+            text-align: center;
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+            background-color: white;
+            border-radius: 10px;
+        }
+        img {
+            max-width: 50%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .details {
+            background-color: #000;
+            color: #0f0;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            font-family: monospace;
+            text-align: center;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin-top: 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .simplified {
+            display: block;
+        }
+        .detailed {
+            display: none;
+        }
+    </style>
+    <script>
+        function toggleView() {
+            var detailed = document.getElementById("detailed");
+            var simplified = document.getElementById("simplified");
+            if (detailed.style.display === "none") {
+                detailed.style.display = "block";
+                simplified.style.display = "none";
+            } else {
+                detailed.style.display = "none";
+                simplified.style.display = "block";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="buynow.html">Buy Now</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="content">
+        <img src="docs/assets/images/sirenlogo.jpeg" alt="Siren Logo"> 
+        <img src="docs/assets/images/siren.jpeg" alt="Siren PC">
+        <div id="simplified" class="details">
+            <p>CPU: 5 GHZ</p>
+            <p>CORES: 8</p>
+            <p>RAM SPEED: 6400 MT/s</p>
+            <p>NVME CAPACITY: 2TB</p>
+            <p>MAX NVME SPEED: 5.0 GBPS</p>
+            <p>WIFI: 6E</p>
+            <p>USB: 9 Ports</p>
+        </div>
+        <div id="detailed" class="details detailed">
+            <p>Base Model:</p>
+            <p>Socket AM5 Ryzen 7 7700X 8 Cores and 16 processing threads</p>
+            <p>Zen 4 Architecture</p>
+            <p>4.5 GHz Base Clock</p>
+            <p>5.4 GHz Max Boost</p>
+            <p>Klevv CRAS XR5 RGB 32 GB (2 x 16 GB) DDR5-6400 CL32 Memory</p>
+            <p>2TB M.2 2280 NVMe Internal SSD | PCIe 4.0 Gen 4x4 | Up to 5000 MB/s</p>
+            <p>1000 W 80+ Platinum Certified Fully Modular ATX Power Supply</p>
+            <p>10+2+1 Power Phase, Dr.MOS</p>
+            <p>4 x DDR5 DIMMs Supports Dual Channel, up to 6400+ (OC)</p>
+            <p>2 PCIe 4.0 x16</p>
+            <p>Graphics Output Options: HDMI, DisplayPort</p>
+            <p>Realtek ALC1220 7.1 CH HD Audio Codec, Nahimic Audio</p>
+            <p>4 SATA3, 2 Hyper M.2 (PCIe Gen4x4), 2 Ultra M.2 (PCIe Gen3 x4)</p>
+            <p>802.11ax WiFi 6E + Bluetooth 5.2</p>
+            <p>Ports on Chassis:</p>
+            <p>One Type C Connector on control panel of chassis.</p>
+            <p>Two USB 3.0 plugs on control panel of chassis for your modern convenience</p>
+            <p>Headphone and Microphone Jack on front of chassis.</p>
+            <p>Ports on Motherboard:</p>
+            <p>1 USB 3.2 Gen2 Type-C Port</p>
+            <p>4 USB 3.2 Gen2 Type-A Ports</p>
+            <p>2 USB 3.2 Gen1 Type-A Ports</p>
+            <p>Phantom Gaming 2.5G LAN</p>
+            <p>1 HDMI, 1 DisplayPort</p>
+            <p>Total USB Ports:</p>
+            <p>1 USB Type-C</p>
+            <p>8 USB Type-A</p>
+            <p>For a total of 9 USB Ports Available</p>
+        </div>
+        <button class="button" onclick="toggleView()">Mutate Description</button>
+    </div>
+
+</body>
+</html>
