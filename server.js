@@ -6,8 +6,8 @@ const app = express();
 // PayPal configuration
 paypal.configure({
     mode: 'sandbox', // or 'live' for production
-    client_id: 'YOUR_PAYPAL_CLIENT_ID',
-    client_secret: 'YOUR_PAYPAL_SECRET'
+    client_id: 'AVEZ72PV_k55rxd4irSKlOiMggCXQhUzZkKJUPUzWYjVUVzVfV-vPu-3HUKcrEnBZetD0OO0kdMLdH_T',
+    client_secret: 'EEF54hMbeHLPG_NyLenr1h1liuETI3vNYMJeDc7lpgYxSa0XWmGoVPweWLoMoR4y696arVzG70C7lYjX'
 });
 
 app.use(bodyParser.json());
