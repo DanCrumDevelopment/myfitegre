@@ -65,6 +65,58 @@
         }
     </style>
     <script>
+        const baseModelPrice = 725.93;
+        const ssdPrices = {
+            "1TB": 56.99,
+            "2TB": 112.99,
+            "4TB": 229.99
+        };
+        const additionalRamPrice = 109.99;
+        const gpuPrices = {
+            "4060": 319.99,
+            "4070": 599.99,
+            "4080": 1020.99,
+            "4090": 2309.75
+        };
+        const salesTaxRate = 0.0825;
+        const fees = {
+            "lamination": 10,
+            "thermalPaste": 0.50,
+            "delivery": 20,
+            "labor": 200
+        };
+
+        function calculateTotal() {
+            let total = baseModelPrice;
+
+            const nvmeSize = document.querySelector('input[name="nvme"]:checked').value;
+            total += ssdPrices[nvmeSize];
+
+            if (document.querySelector('input[name="add_second_nvme"]:checked')?.value === "yes") {
+                const secondNvmeSize = document.querySelector('input[name="second_nvme"]:checked').value;
+                total += ssdPrices[secondNvmeSize];
+            }
+
+            if (document.querySelector('input[name="add_ram"]:checked')?.value === "yes") {
+                total += additionalRamPrice;
+            }
+
+            if (document.querySelector('input[name="add_gpu"]:checked')?.value === "yes") {
+                const gpu = document.querySelector('input[name="gpu"]:checked').value;
+                total += gpuPrices[gpu];
+            }
+
+            // Calculate tax on the selected items
+            const totalBeforeTax = total;
+            total += totalBeforeTax * salesTaxRate;
+
+            // Add additional fees
+            total += fees.lamination + fees.thermalPaste + fees.delivery + fees.labor;
+
+            // Display the final total
+            document.getElementById('total').innerText = "Total: $" + total.toFixed(2) + " - Total Including Delivery and Tax";
+        }
+
         function showNext(id, condition) {
             const element = document.getElementById(id);
             if (condition) {
@@ -72,41 +124,16 @@
             } else {
                 element.classList.add('hidden');
             }
+            calculateTotal();
         }
 
-        function calculateTotal() {
-            let total = 1017.60; // Base price for Nova
-            let nvmeOptions = document.getElementsByName('nvme');
-            for (let option of nvmeOptions) {
-                if (option.checked) {
-                    total += parseFloat(option.value);
-                }
-            }
-
-            let secondNvmeOptions = document.getElementsByName('second_nvme');
-            if (document.querySelector('input[name="add_second_nvme"]:checked').value === "yes") {
-                for (let option of secondNvmeOptions) {
-                    if (option.checked) {
-                        total += parseFloat(option.value);
-                    }
-                }
-            }
-
-            let gpuOptions = document.getElementsByName('gpu');
-            if (document.querySelector('input[name="add_gpu"]:checked').value === "yes") {
-                for (let option of gpuOptions) {
-                    if (option.checked) {
-                        total += parseFloat(option.value);
-                    }
-                }
-            }
-
-            if (document.querySelector('input[name="add_ram"]:checked').value === "yes") {
-                total += 50; // Example price for additional 16GB RAM
-            }
-
-            document.getElementById('total').innerText = "Total: $" + total.toFixed(2);
+        function initialize() {
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.addEventListener('change', () => calculateTotal());
+            });
         }
+
+        window.onload = initialize;
     </script>
 </head>
 <body>
@@ -123,9 +150,9 @@
         <form>
             <div class="form-group">
                 <label>Select NVME Size:</label>
-                <input type="radio" name="nvme" value="0" onclick="showNext('second_nvme', true)"> 1 TB<br>
-                <input type="radio" name="nvme" value="100" onclick="showNext('second_nvme', true)"> 2 TB<br>
-                <input type="radio" name="nvme" value="200" onclick="showNext('second_nvme', true)"> 4 TB<br>
+                <input type="radio" name="nvme" value="1TB" onclick="showNext('second_nvme', true)"> 1 TB<br>
+                <input type="radio" name="nvme" value="2TB" onclick="showNext('second_nvme', true)"> 2 TB<br>
+                <input type="radio" name="nvme" value="4TB" onclick="showNext('second_nvme', true)"> 4 TB<br>
             </div>
 
             <div id="second_nvme" class="form-group hidden">
@@ -136,9 +163,9 @@
 
             <div id="second_nvme_options" class="form-group hidden">
                 <label>Select second NVME Size:</label>
-                <input type="radio" name="second_nvme" value="0" onclick="showNext('gpu', true)"> 1 TB<br>
-                <input type="radio" name="second_nvme" value="100" onclick="showNext('gpu', true)"> 2 TB<br>
-                <input type="radio" name="second_nvme" value="200" onclick="showNext('gpu', true)"> 4 TB<br>
+                <input type="radio" name="second_nvme" value="1TB" onclick="showNext('gpu', true)"> 1 TB<br>
+                <input type="radio" name="second_nvme" value="2TB" onclick="showNext('gpu', true)"> 2 TB<br>
+                <input type="radio" name="second_nvme" value="4TB" onclick="showNext('gpu', true)"> 4 TB<br>
             </div>
 
             <div id="gpu" class="form-group hidden">
@@ -149,10 +176,10 @@
 
             <div id="gpu_options" class="form-group hidden">
                 <label>Select Graphics Card:</label>
-                <input type="radio" name="gpu" value="300" onclick="showNext('ram', true)"> 4060<br>
-                <input type="radio" name="gpu" value="500" onclick="showNext('ram', true)"> 4070<br>
-                <input type="radio" name="gpu" value="800" onclick="showNext('ram', true)"> 4080<br>
-                <input type="radio" name="gpu" value="1500" onclick="showNext('ram', true)"> 4090<br>
+                <input type="radio" name="gpu" value="4060" onclick="showNext('ram', true)"> 4060<br>
+                <input type="radio" name="gpu" value="4070" onclick="showNext('ram', true)"> 4070<br>
+                <input type="radio" name="gpu" value="4080" onclick="showNext('ram', true)"> 4080<br>
+                <input type="radio" name="gpu" value="4090" onclick="showNext('ram', true)"> 4090<br>
             </div>
 
             <div id="ram" class="form-group hidden">
