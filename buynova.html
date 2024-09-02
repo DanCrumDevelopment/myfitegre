@@ -57,11 +57,24 @@
         .form-group button {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 4px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+        }
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+        #total {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #credit-cards {
+            margin-top: 20px;
         }
     </style>
     <script>
@@ -115,6 +128,10 @@
 
             // Display the final total
             document.getElementById('total').innerText = "Total: $" + total.toFixed(2) + " - Total Including Delivery and Tax";
+
+            // Show the total and the Buy Now button after selecting RAM option
+            document.getElementById('total').classList.remove('hidden');
+            document.getElementById('buy-now-button').classList.remove('hidden');
         }
 
         function showNext(id, condition) {
@@ -147,7 +164,7 @@
 
     <div class="content">
         <h2>Customize Your Nova</h2>
-        <form>
+        <form action="https://formspree.io/f/xovabazk" method="POST">
             <div class="form-group">
                 <label>Select NVME Size:</label>
                 <input type="radio" name="nvme" value="1TB" onclick="showNext('second_nvme', true)"> 1 TB<br>
@@ -188,11 +205,40 @@
                 <input type="radio" name="add_ram" value="no" onclick="calculateTotal()"> No<br>
             </div>
 
-            <div id="total" style="margin-top: 20px; font-size: 20px;"></div>
+            <div id="total" style="margin-top: 20px; font-size: 20px;" class="hidden"></div>
 
-            <button type="button" onclick="calculateTotal()">Buy Now</button>
+            <button type="submit" id="buy-now-button" class="form-group hidden">
+                Buy Now
+            </button>
         </form>
+
+        <div id="credit-cards">
+            <img src="path_to_credit_card_banner_image.jpeg" alt="Accepted Credit Cards">
+        </div>
     </div>
+
+    <!-- PayPal Button -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AVEZ72PV_k55rxd4irSKlOiMggCXQhUzZkKJUPUzWYjVUVzVfV-vPu-3HUKcrEnBZetD0OO0kdMLdH_T&currency=USD"></script>
+    <script>
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: document.getElementById('total').innerText.replace(/[^0-9.-]+/g,"") // Extract total value
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('Transaction completed by ' + details.payer.name.given_name);
+                    // Redirect to PayPal
+                    window.location.href = "https://www.paypal.com/checkoutnow?useraction=commit&token=" + data.orderID;
+                });
+            }
+        }).render('#buy-now-button');
+    </script>
 
 </body>
 </html>
