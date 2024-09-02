@@ -9,6 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            text-align: center; /* Ensure everything is centered */
         }
         nav {
             background-color: #333;
@@ -57,10 +58,11 @@
         }
         form {
             margin-top: 20px;
-            text-align: left;
+            text-align: center; /* Ensure form elements are centered */
         }
         .form-group {
             margin-bottom: 20px;
+            text-align: center;
         }
         .form-group label {
             display: block;
@@ -68,6 +70,15 @@
         }
         .form-group input[type="radio"] {
             margin-right: 10px;
+        }
+        .form-group input[type="number"] {
+            width: 50%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            margin-top: 10px;
+            text-align: center;
         }
         .hidden {
             display: none;
@@ -105,6 +116,8 @@
             "labor": 200
         };
 
+        let calculatedTotal = 0;
+
         function calculateTotal() {
             let total = baseModelPrice;
 
@@ -132,6 +145,8 @@
             // Add additional fees
             total += fees.lamination + fees.thermalPaste + fees.delivery + fees.labor;
 
+            calculatedTotal = total;
+
             // Display the final total
             document.getElementById('total').innerText = "Total: $" + total.toFixed(2) + " - Total Including Delivery and Tax";
 
@@ -156,6 +171,16 @@
             });
         }
 
+        function validatePrice() {
+            const enteredPrice = parseFloat(document.getElementById('entered-price').value);
+            if (enteredPrice === calculatedTotal) {
+                return true; // Price matches, allow form submission
+            } else {
+                window.location.href = "price-error.html"; // Redirect to error page
+                return false; // Prevent form submission
+            }
+        }
+
         window.onload = initialize;
     </script>
 </head>
@@ -171,7 +196,7 @@
     <div class="content">
         <h2>Customize Your Nova</h2>
         <img src="docs/assets/images/customize.jpeg" alt="Customize Your Nova" class="customize">
-        <form id="purchase-form" action="https://formspree.io/f/xovabazk" method="POST">
+        <form id="purchase-form" action="https://formspree.io/f/xovabazk" method="POST" onsubmit="return validatePrice()">
             <div class="form-group">
                 <label>Select NVME Size:</label>
                 <input type="radio" name="nvme" value="1TB" onclick="showNext('second_nvme', true)"> 1 TB<br>
@@ -214,6 +239,11 @@
 
             <div id="total" class="hidden"></div>
 
+            <div class="form-group">
+                <label for="entered-price">Now rewrite your total here to confirm price:</label>
+                <input type="number" id="entered-price" name="entered_price" required>
+            </div>
+
             <!-- PayPal Button Container -->
             <div id="paypal-container-T7X56RD3LX9DW" class="hidden"></div>
         </form>
@@ -228,3 +258,4 @@
 
 </body>
 </html>
+
