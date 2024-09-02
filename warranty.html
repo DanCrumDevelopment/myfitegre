@@ -1,100 +1,208 @@
-const baseModelPrice = 1011.40; // Baseline price with 1TB NVMe included
-
-const ssdPrices = {
-    "1TB": 0,  // No additional cost for 1TB, included in baseline
-    "2TB": 56.00,  // The additional cost for upgrading to 2TB (112.99 - 56.99)
-    "4TB": 173.00  // The additional cost for upgrading to 4TB (229.99 - 56.99)
-};
-
-const additionalRamPrice = 109.99; // Price for extra 16GB RAM
-
-const gpuPrices = {
-    "4060": 369.99,
-    "4070": 759.99,
-    "4080": 1119.99,
-    "4090": 2299.99
-};
-
-const salesTaxRate = 0.0825;
-const fees = {
-    "lamination": 10,
-    "thermalPaste": 0.50,
-    "delivery": 20,
-    "labor": 200
-};
-
-let calculatedTotal = 0;
-
-function calculateTotal() {
-    let total = baseModelPrice; // Start with the baseline price, which includes 1TB NVMe SSD
-
-    const nvmeSize = document.querySelector('input[name="nvme"]:checked')?.value;
-    total += ssdPrices[nvmeSize]; // Add cost only if the user upgrades the SSD
-
-    if (document.querySelector('input[name="add_second_nvme"]:checked')?.value === "yes") {
-        const secondNvmeSize = document.querySelector('input[name="second_nvme"]:checked').value;
-        total += ssdPrices[secondNvmeSize];
-    }
-
-    if (document.querySelector('input[name="add_ram"]:checked')?.value === "yes") {
-        total += additionalRamPrice;
-    }
-
-    if (document.querySelector('input[name="add_gpu"]:checked')?.value === "yes") {
-        const gpu = document.querySelector('input[name="gpu"]:checked').value;
-        total += gpuPrices[gpu];
-    }
-
-    const totalBeforeTax = total; // This should be the subtotal before tax and fees
-    total += totalBeforeTax * salesTaxRate; // Apply tax
-    total += fees.lamination + fees.thermalPaste + fees.delivery + fees.labor; // Add fees
-
-    calculatedTotal = total;
-
-    document.getElementById('total').innerText = "Total: $" + total.toFixed(2) + " - Total Including Delivery and Tax";
-}
-
-function showNext(id, condition) {
-    const element = document.getElementById(id);
-    if (condition) {
-        element.classList.remove('hidden');
-    } else {
-        element.classList.add('hidden');
-    }
-    calculateTotal();
-}
-
-function initialize() {
-    document.querySelectorAll('input[type="radio"]').forEach(radio => {
-        radio.addEventListener('change', () => calculateTotal());
-    });
-
-    const ramRadios = document.querySelectorAll('input[name="add_ram"]');
-    ramRadios.forEach(radio => {
-        radio.addEventListener('change', () => {
-            document.getElementById('total').style.display = "block";
-            document.getElementById('paypal-button-container').style.display = "block";
-        });
-    });
-}
-
-window.onload = function () {
-    initialize();
-
-    paypal.Buttons({
-        createOrder: function(data, actions) {
-            return actions.order.create({
-                purchase_units: [{
-                    amount: {
-                        value: calculatedTotal.toFixed(2) // Use the calculated total
-                    }
-                }]
-            });
-        },
-        onApprove: function(data, actions) {
-            return actions.order.capture().then(function(details) {
-                alert('Transaction completed by ' + details.payer.name.given_name);
-            });
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myfitegre Technologies LLC - Warranty</title>
+    <link rel="icon" href="docs/assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
         }
-    }).render('#paypal-button-container');
-};
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 12px;
+            display: inline-block;
+            font-size: 14px;
+        }
+        .active {
+            background-color: #4CAF50;
+            border-radius: 4px;
+        }
+        .content-columns {
+            display: flex;
+            flex-direction: column; /* Stack columns vertically on mobile */
+            justify-content: space-around;
+            padding: 20px;
+        }
+        @media (min-width: 768px) {
+            .content-columns {
+                flex-direction: row; /* Side by side on larger screens */
+            }
+        }
+        .column {
+            background-color: white;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            flex-basis: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .column {
+                flex-basis: 30%; /* Adjust width on larger screens */
+            }
+        }
+        .column:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.35);
+        }
+        img {
+            max-width: 60%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        /* Shorten descriptions on mobile devices */
+        @media (max-width: 767px) {
+            td[data-part="CPU"]::before { content: "CPU"; }
+            td[data-part="Motherboard"]::before { content: "Motherboard"; }
+            td[data-part="Memory"]::before { content: "RAM"; }
+            td[data-part="Storage"]::before { content: "SSD"; }
+            td[data-part="Case"]::before { content: "Case"; }
+            td[data-part="Power Supply"]::before { content: "PSU"; }
+            td[data-part="CPU Cooler"]::before { content: "WATERCOOLER"; }
+            td[data-part="4060"]::before { content: "GPU 4060"; }
+            td[data-part="4070"]::before { content: "GPU 4070"; }
+            td[data-part="4080"]::before { content: "GPU 4080"; }
+            td[data-part="4090"]::before { content: "GPU 4090"; }
+            td::before {
+                content: "";
+                display: inline-block;
+                margin-right: 5px;
+            }
+            td[data-part] {
+                visibility: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="buynow.html">Buy Now</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="warranty.html" class="active">Warranty</a>
+    </nav>
+
+    <div class="content-columns">
+        <!-- Left Column: Nova Logo and Tables -->
+        <div class="column">
+            <img src="docs/assets/images/novalogo.jpeg" alt="Nova Logo">
+            <h2>Baseline Components</h2>
+            <table>
+                <tr>
+                    <th>Part</th>
+                    <th>Warranty</th>
+                </tr>
+                <tr>
+                    <td data-part="CPU">AMD Ryzen 5 8500G 4.1 GHz 6-Core Processor</td>
+                    <td>3 Years</td>
+                </tr>
+                <tr>
+                    <td data-part="Motherboard">ASRock A620I LIGHTNING WIFI Mini ITX AM5 Motherboard</td>
+                    <td>1 Year</td>
+                </tr>
+                <tr>
+                    <td data-part="Memory">Klevv CRAS XR5 RGB 32 GB (2 x 16 GB) DDR5-7200 CL36 Memory</td>
+                    <td>Lifetime</td>
+                </tr>
+                <tr>
+                    <td data-part="Storage">Kingston NV2 1 TB M.2-2280 PCIe 4.0 X4 NVME Solid State Drive</td>
+                    <td>3 Years</td>
+                </tr>
+                <tr>
+                    <td data-part="Case">Thermaltake The Tower 100 Snow Mini ITX Tower Case</td>
+                    <td>3 Years</td>
+                </tr>
+                <tr>
+                    <td data-part="Power Supply">Thermaltake Toughpower GF A3 Snow 850 W 80+ Gold Certified Fully Modular ATX PSU</td>
+                    <td>10 Years</td>
+                </tr>
+                <tr>
+                    <td data-part="CPU Cooler">Thermaltake TH120 V2 ARGB Sync 57.05 CFM Liquid CPU Cooler</td>
+                    <td>2 Years</td>
+                </tr>
+            </table>
+
+            <h2>Addons</h2>
+            <table>
+                <tr>
+                    <th>Part</th>
+                    <th>Warranty</th>
+                </tr>
+                <tr>
+                    <td data-part="SSD">NVME (Crucial P3 1TB, 2TB, 4TB)</td>
+                    <td>5 Years</td>
+                </tr>
+                <tr>
+                    <td data-part="Memory">Memory (Klevv CRAS XR5 RGB 32 GB)</td>
+                    <td>Lifetime</td>
+                </tr>
+                <tr>
+                    <td data-part="4060">ROG Strix GeForce RTX™ 4060 OC Edition</td>
+                    <td>3 Years</td>
+                </tr>
+                <tr>
+                    <td data-part="4070">ROG Strix GeForce RTX™ 4070 OC Edition</td>
+                    <td>3 Years</td>
+                </tr>
+                <tr>
+                    <td data-part="4080">Gaming RTX 4080 SUPER 16G GAMING X SLIM WHITE Graphics Card</td>
+                    <td>3 Years</td>
+                </tr>
+                <tr>
+                    <td data-part="4090">ROG Strix GeForce RTX 4090 OC Edition Gaming Graphics Card White</td>
+                    <td>3 Years</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Middle Column: Siren Logo and Placeholder Text -->
+        <div class="column">
+            <img src="docs/assets/images/sirenlogo.jpeg" alt="Siren Logo">
+            <h2>Maintenance</h2>
+            <p>Coming Soon</p>
+        </div>
+
+        <!-- Right Column: Apocalypse Logo and Placeholder Text -->
+        <div class="column">
+            <img src="docs/assets/images/apocalypselogo.jpeg" alt="Apocalypse Logo">
+            <h2>Maintenance</h2>
+            <p>Coming Soon</p>
+        </div>
+    </div>
+
+</body>
+</html>
