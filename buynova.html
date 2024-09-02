@@ -80,19 +80,8 @@
             font-weight: bold;
             display: none; /* Initially hidden, will appear after RAM selection */
         }
-        input[type="number"] {
-            width: 50%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-            margin-top: 10px;
-            text-align: center;
-        }
-        #confirmation-message {
-            color: green;
-            margin-top: 10px;
-            display: none; /* Initially hidden */
+        #paypal-container-Y9QLL2967VV28 {
+            display: none; /* Initially hidden, will appear after RAM selection */
         }
     </style>
     <script>
@@ -177,17 +166,6 @@
             });
         }
 
-        function validatePrice() {
-            const enteredPrice = parseFloat(document.getElementById('entered-price').value);
-            if (enteredPrice === calculatedTotal) {
-                document.getElementById('confirmation-message').style.display = "block";
-                return true; // Price matches, allow form submission
-            } else {
-                window.location.href = "price-error.html"; // Redirect to error page
-                return false; // Prevent form submission
-            }
-        }
-
         window.onload = initialize;
     </script>
 </head>
@@ -205,7 +183,7 @@
         <div style="text-align:center;">
             <img src="docs/assets/images/customize.jpeg" alt="Customize Your Nova" class="customize">
         </div>
-        <form id="purchase-form" action="https://formspree.io/f/xovabazk" method="POST" onsubmit="return validatePrice()">
+        <form id="purchase-form">
             <div class="form-group">
                 <label>Select NVME Size:</label>
                 <input type="radio" name="nvme" value="1TB" onclick="showNext('second_nvme', true)"> 1 TB<br>
@@ -249,14 +227,6 @@
             <!-- The total price and PayPal button will be shown after the RAM selection -->
             <div id="total"></div>
 
-            <div style="text-align:center;">
-                <label for="entered-price">Now rewrite your total here to confirm price:</label>
-                <input type="number" id="entered-price" name="entered_price" required>
-            </div>
-
-            <div id="confirmation-message">Price confirmed! You may proceed to click the PayPal or Venmo button.</div>
-
-            <!-- PayPal Button Container -->
             <div style="text-align:center;">
                 <div id="paypal-container-Y9QLL2967VV28"></div>
             </div>
