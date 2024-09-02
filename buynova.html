@@ -86,6 +86,7 @@
             display: none; /* Initially hidden, will appear after RAM selection */
         }
     </style>
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAoZlFu0Dg8P_fvy0JFGVaIBDLBKYvj7oVjsxBds4z09sBZ-gT7kEpz1IvXfUqrKxjB9hkumORKnXWD0Q&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
     <script>
         const baseModelPrice = 725.93;
         const ssdPrices = {
@@ -168,7 +169,13 @@
             });
         }
 
-        window.onload = initialize;
+        window.onload = function () {
+            initialize();
+            // PayPal Hosted Button Initialization
+            paypal.HostedButtons({
+                hostedButtonId: "Y9QLL2967VV28",
+            }).render("#paypal-container-Y9QLL2967VV28");
+        };
     </script>
 </head>
 <body>
@@ -235,13 +242,6 @@
             </div>
         </form>
     </div>
-
-    <!-- PayPal Hosted Button Script -->
-    <script>
-        paypal.HostedButtons({
-            hostedButtonId: "Y9QLL2967VV28",
-        }).render("#paypal-container-Y9QLL2967VV28");
-    </script>
 
 </body>
 </html>
