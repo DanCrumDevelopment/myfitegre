@@ -89,18 +89,23 @@
     <script src="https://www.paypal.com/sdk/js?client-id=AVEZ72PV_k55rxd4irSKlOiMggCXQhUzZkKJUPUzWYjVUVzVfV-vPu-3HUKcrEnBZetD0OO0kdMLdH_T&currency=USD"></script>
     <script>
         const baseModelPrice = 1011.40; // Updated base model price
+
+        // Updated component prices based on the latest tables
         const ssdPrices = {
-            "1TB": 56.99,
+            "1TB": 56.99,  // Baseline SSD included
             "2TB": 112.99,
             "4TB": 229.99
         };
-        const additionalRamPrice = 109.99;
+
+        const additionalRamPrice = 109.99; // Price for extra 16GB RAM
+
         const gpuPrices = {
-            "4060": 319.99,
-            "4070": 599.99,
-            "4080": 1020.99,
-            "4090": 2309.75
+            "4060": 369.99,
+            "4070": 759.99,
+            "4080": 1119.99,
+            "4090": 2299.99
         };
+
         const salesTaxRate = 0.0825;
         const fees = {
             "lamination": 10,
@@ -112,10 +117,12 @@
         let calculatedTotal = 0;
 
         function calculateTotal() {
-            let total = baseModelPrice;
+            let total = baseModelPrice; // Start with the baseline price
 
-            const nvmeSize = document.querySelector('input[name="nvme"]:checked').value;
-            total += ssdPrices[nvmeSize];
+            const nvmeSize = document.querySelector('input[name="nvme"]:checked')?.value;
+            if (nvmeSize !== "1TB") { // Only add cost if the user upgrades the SSD
+                total += ssdPrices[nvmeSize];
+            }
 
             if (document.querySelector('input[name="add_second_nvme"]:checked')?.value === "yes") {
                 const secondNvmeSize = document.querySelector('input[name="second_nvme"]:checked').value;
