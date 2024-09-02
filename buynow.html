@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Myfitegre Technologies LLC - Buy Now</title>
+    <title>Buy Now - Myfitegre Technologies LLC</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -28,13 +28,46 @@
             background-color: #4CAF50;
             border-radius: 4px;
         }
-        h1 {
-            padding: 20px;
-            text-align: center;
+        .banner {
+            width: 100%;
+            max-height: 30%;
+            object-fit: cover;
         }
-        p {
-            padding: 0 20px;
+        .offerings {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .offering {
             text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+            width: 100%;
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+        .offering:hover {
+            transform: scale(1.05);
+        }
+        .offering img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            max-width: 200px;
+        }
+        .offering a {
+            text-decoration: none;
+            color: inherit;
+        }
+        @media (min-width: 768px) {
+            .offering {
+                width: 30%;
+            }
         }
     </style>
 </head>
@@ -47,8 +80,26 @@
         <a href="contact.html">Contact</a>
     </nav>
 
-    <h1>Buy Your Custom PC Now</h1>
-    <p>Details about how to purchase the custom PCs will go here.</p>
+    <section class="offerings">
+        <div class="offering">
+            <a href="buynova.html">
+                <img src="docs/assets/images/nova.jpeg" alt="Nova PC">
+                <h3>Nova</h3>
+            </a>
+        </div>
+        <div class="offering">
+            <a href="buysiren.html">
+                <img src="docs/assets/images/siren.jpeg" alt="Siren PC">
+                <h3>Siren</h3>
+            </a>
+        </div>
+        <div class="offering">
+            <a href="buyapocalypse.html">
+                <img src="docs/assets/images/apocalypse.jpeg" alt="Apocalypse PC">
+                <h3>Apocalypse</h3>
+            </a>
+        </div>
+    </section>
 
 </body>
 </html>

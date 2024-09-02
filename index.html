@@ -69,14 +69,32 @@
                 width: 30%;
             }
         }
-        .offerings-image {
-            width: 20%;
-            height: auto;
-            margin: 20px auto;
-            padding: 20px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            display: block;
+        @keyframes flash {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .flashing-green {
+            color: green;
+            animation: flash 1s infinite;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        .rainbow-text {
+            font-size: 18px;
+            font-weight: bold;
+            background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .small-black-text {
+            color: black;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #f4f4f4;
+            padding: 5px;
+            border-radius: 4px;
+            display: inline-block;
         }
     </style>
 </head>
@@ -91,7 +109,7 @@
 
     <img src="docs/assets/images/banner.jpeg" alt="Myfitegre Technologies LLC Banner" class="banner">
     <div style="text-align:center;">
-        <img src="docs/assets/images/offerings.jpeg" alt="Our Offerings" class="offerings-image">
+        <img src="docs/assets/images/offerings.jpeg" alt="Our Offerings" style="max-width: 20%; height: auto; margin: 20px auto; padding: 20px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); border-radius: 8px;">
     </div>
     <section class="offerings">
         <div class="offering">
@@ -99,6 +117,13 @@
                 <img src="docs/assets/images/nova.jpeg" alt="Nova PC">
                 <h3>Nova</h3>
             </a>
+            <div style="text-align:center;">
+                <div class="flashing-green">$1,017.60</div>
+                <br>
+                <div class="rainbow-text">Available Now!</div>
+                <br>
+                <div class="small-black-text">Final Price - includes delivery & tax</div>
+            </div>
         </div>
         <div class="offering">
             <a href="sirenclass.html">

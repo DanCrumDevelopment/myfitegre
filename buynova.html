@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Nova - Myfitegre Technologies LLC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 12px;
+            display: inline-block;
+            font-size: 14px;
+        }
+        .active {
+            background-color: #4CAF50;
+            border-radius: 4px;
+        }
+        .content {
+            text-align: center;
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+            background-color: white;
+            border-radius: 10px;
+        }
+        form {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="radio"] {
+            margin-right: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        .form-group button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+    <script>
+        function showNext(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function calculateTotal() {
+            let total = 1017.60; // Base price for Nova
+            let nvmeOptions = document.getElementsByName('nvme');
+            for (let option of nvmeOptions) {
+                if (option.checked) {
+                    total += parseFloat(option.value);
+                }
+            }
+
+            let secondNvmeOptions = document.getElementsByName('second_nvme');
+            if (document.querySelector('input[name="add_second_nvme"]:checked').value === "yes") {
+                for (let option of secondNvmeOptions) {
+                    if (option.checked) {
+                        total += parseFloat(option.value);
+                    }
+                }
+            }
+
+            let gpuOptions = document.getElementsByName('gpu');
+            if (document.querySelector('input[name="add_gpu"]:checked').value === "yes") {
+                for (let option of gpuOptions) {
+                    if (option.checked) {
+                        total += parseFloat(option.value);
+                    }
+                }
+            }
+
+            if (document.querySelector('input[name="add_ram"]:checked').value === "yes") {
+                total += 50; // Example price for additional 16GB RAM
+            }
+
+            document.getElementById('total').innerText = "Total: $" + total.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="buynow.html" class="active">Buy Now</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="content">
+        <h2>Customize Your Nova</h2>
+        <form>
+            <div class="form-group">
+                <label>Select NVME Size:</label>
+                <input type="radio" name="nvme" value="0" onclick="showNext('second_nvme')"> 1 TB<br>
+                <input type="radio" name="nvme" value="100" onclick="showNext('second_nvme')"> 2 TB<br>
+                <input type="radio" name="nvme" value="200" onclick="showNext('second_nvme')"> 4 TB<br>
+            </div>
+
+            <div id="second_nvme" class="form-group hidden">
+                <label>Add another NVME?</label>
+                <input type="radio" name="add_second_nvme" value="yes" onclick="showNext('second_nvme_options')"> Yes<br>
+                <input type="radio" name="add_second_nvme" value="no" onclick="showNext('gpu')"> No<br>
+            </div>
+
+            <div id="second_nvme_options" class="form-group hidden">
+                <label>Select second NVME Size:</label>
+                <input type="radio" name="second_nvme" value="0" onclick="showNext('gpu')"> 1 TB<br>
+                <input type="radio" name="second_nvme" value="100" onclick="showNext('gpu')"> 2 TB<br>
+                <input type="radio" name="second_nvme" value="200" onclick="showNext('gpu')"> 4 TB<br>
+            </div>
+
+            <div id="gpu" class="form-group hidden">
+                <label>Add Graphics Card?</label>
+                <input type="radio" name="add_gpu" value="yes" onclick="showNext('gpu_options')"> Yes<br>
+                <input type="radio" name="add_gpu" value="no" onclick="showNext('ram')"> No<br>
+            </div>
+
+            <div id="gpu_options" class="form-group hidden">
+                <label>Select Graphics Card:</label>
+                <input type="radio" name="gpu" value="300" onclick="showNext('ram')"> 4060<br>
+                <input type="radio" name="gpu" value="500" onclick="showNext('ram')"> 4070<br>
+                <input type="radio" name="gpu" value="800" onclick="showNext('ram')"> 4080<br>
+                <input type="radio" name="gpu" value="1500" onclick="showNext('ram')"> 4090<br>
+            </div>
+
+            <div id="ram" class="form-group hidden">
+                <label>Add 16GB more Ram?</label>
+                <input type="radio" name="add_ram" value="yes" onclick="calculateTotal()"> Yes<br>
+                <input type="radio" name="add_ram" value="no" onclick="calculateTotal()"> No<br>
+            </div>
+
+            <div id="total" style="margin-top: 20px; font-size: 20px;"></div>
+
+            <button type="button" onclick="calculateTotal()">Buy Now</button>
+        </form>
+    </div>
+
+</body>
+</html>
