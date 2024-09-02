@@ -48,7 +48,7 @@
             border-radius: 10px;
         }
         img.customize {
-            max-width: 40%;
+            max-width: 40%; /* Adjusted as per your request */
             height: auto;
             margin: 20px 0;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
@@ -173,8 +173,8 @@
             ramRadios.forEach(radio => {
                 radio.addEventListener('change', () => {
                     document.getElementById('total').classList.remove('hidden');
-                    document.getElementById('confirmation-section').style.display = "block";
-                    document.getElementById('paypal-container-T7X56RD3LX9DW').style.display = "block";
+                    document.getElementById('confirmation-section').classList.remove('hidden');
+                    document.getElementById('paypal-container-T7X56RD3LX9DW').classList.remove('hidden');
                 });
             });
         }
