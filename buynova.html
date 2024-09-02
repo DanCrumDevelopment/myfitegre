@@ -80,10 +80,6 @@
             font-weight: bold;
             display: none; /* Initially hidden, will appear after RAM selection */
         }
-        #paypal-container-VS34S726F8M7L {
-            margin-top: 20px;
-            display: none; /* Initially hidden, will appear after RAM selection */
-        }
         input[type="number"] {
             width: 50%;
             padding: 10px;
@@ -99,8 +95,6 @@
             display: none; /* Initially hidden */
         }
     </style>
-    <!-- PayPal SDK Script -->
-    <script src="https://www.paypal.com/sdk/js?client-id=BAAoZlFu0Dg8P_fvy0JFGVaIBDLBKYvj7oVjsxBds4z09sBZ-gT7kEpz1IvXfUqrKxjB9hkumORKnXWD0Q&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
     <script>
         const baseModelPrice = 725.93;
         const ssdPrices = {
@@ -178,7 +172,7 @@
             ramRadios.forEach(radio => {
                 radio.addEventListener('change', () => {
                     document.getElementById('total').style.display = "block";
-                    document.getElementById('paypal-container-VS34S726F8M7L').style.display = "block";
+                    document.getElementById('paypal-container-Y9QLL2967VV28').style.display = "block";
                 });
             });
         }
@@ -254,6 +248,7 @@
 
             <!-- The total price and PayPal button will be shown after the RAM selection -->
             <div id="total"></div>
+
             <div style="text-align:center;">
                 <label for="entered-price">Now rewrite your total here to confirm price:</label>
                 <input type="number" id="entered-price" name="entered_price" required>
@@ -262,15 +257,17 @@
             <div id="confirmation-message">Price confirmed! You may proceed to click the PayPal or Venmo button.</div>
 
             <!-- PayPal Button Container -->
-            <div id="paypal-container-VS34S726F8M7L"></div>
+            <div style="text-align:center;">
+                <div id="paypal-container-Y9QLL2967VV28"></div>
+            </div>
         </form>
     </div>
 
     <!-- PayPal Hosted Button Script -->
     <script>
         paypal.HostedButtons({
-            hostedButtonId: "VS34S726F8M7L",
-        }).render("#paypal-container-VS34S726F8M7L");
+            hostedButtonId: "Y9QLL2967VV28",
+        }).render("#paypal-container-Y9QLL2967VV28");
     </script>
 
 </body>
