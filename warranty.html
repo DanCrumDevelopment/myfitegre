@@ -44,14 +44,23 @@
             transition: transform 0.3s, box-shadow 0.3s;
             flex-basis: 30%;
             box-sizing: border-box;
+            text-align: center;
         }
         .column:hover {
             transform: scale(1.05);
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.35);
         }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+        }
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
         th, td {
             padding: 10px;
@@ -70,12 +79,14 @@
         <a href="index.html">Home</a>
         <a href="buynow.html">Buy Now</a>
         <a href="about.html">About</a>
-        <a href="warranty.html" class="active">Warranty</a>
         <a href="contact.html">Contact</a>
+        <a href="warranty.html" class="active">Warranty</a>
     </nav>
 
     <div class="content-columns">
+        <!-- Left Column: Nova Logo and Tables -->
         <div class="column">
+            <img src="docs/assets/images/nova_logo.png" alt="Nova Logo">
             <h2>Baseline Components</h2>
             <table>
                 <tr>
@@ -107,9 +118,7 @@
                     <td>10 Years</td>
                 </tr>
             </table>
-        </div>
 
-        <div class="column">
             <h2>Addons</h2>
             <table>
                 <tr>
@@ -141,6 +150,20 @@
                     <td>3 Years</td>
                 </tr>
             </table>
+        </div>
+
+        <!-- Middle Column: Siren Logo and Placeholder Text -->
+        <div class="column">
+            <img src="docs/assets/images/siren_logo.png" alt="Siren Logo">
+            <h2>Maintenance</h2>
+            <p>Coming Soon</p>
+        </div>
+
+        <!-- Right Column: Apocalypse Logo and Placeholder Text -->
+        <div class="column">
+            <img src="docs/assets/images/apocalypse_logo.png" alt="Apocalypse Logo">
+            <h2>Maintenance</h2>
+            <p>Coming Soon</p>
         </div>
     </div>
 
