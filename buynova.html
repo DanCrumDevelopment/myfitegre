@@ -10,7 +10,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            text-align: center; /* Ensure everything is centered */
+            text-align: center;
         }
         nav {
             background-color: #333;
@@ -49,17 +49,13 @@
             border-radius: 10px;
         }
         img.customize {
-            max-width: 40%; /* Adjusted as per your request */
+            max-width: 40%;
             height: auto;
             margin: 20px 0;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
             padding: 15px;
             border: 2px solid #4CAF50;
             border-radius: 10px;
-        }
-        form {
-            margin-top: 20px;
-            text-align: center; /* Ensure form elements are centered */
         }
         .form-group {
             margin-bottom: 20px;
@@ -79,14 +75,13 @@
             margin-top: 20px;
             font-size: 20px;
             font-weight: bold;
-            display: none; /* Initially hidden, will appear after RAM selection */
+            display: none;
         }
-        #paypal-container-Y9QLL2967VV28 {
+        #paypal-button-container {
             margin-top: 20px;
-            display: none; /* Initially hidden, will appear after RAM selection */
+            display: none;
         }
     </style>
-    <script src="https://www.paypal.com/sdk/js?client-id=BAAoZlFu0Dg8P_fvy0JFGVaIBDLBKYvj7oVjsxBds4z09sBZ-gT7kEpz1IvXfUqrKxjB9hkumORKnXWD0Q&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
     <script>
         const baseModelPrice = 725.93;
         const ssdPrices = {
@@ -131,16 +126,13 @@
                 total += gpuPrices[gpu];
             }
 
-            // Calculate tax on the selected items
             const totalBeforeTax = total;
             total += totalBeforeTax * salesTaxRate;
 
-            // Add additional fees
             total += fees.lamination + fees.thermalPaste + fees.delivery + fees.labor;
 
             calculatedTotal = total;
 
-            // Display the final total
             document.getElementById('total').innerText = "Total: $" + total.toFixed(2) + " - Total Including Delivery and Tax";
         }
 
@@ -159,23 +151,31 @@
                 radio.addEventListener('change', () => calculateTotal());
             });
 
-            // Show total and PayPal button after RAM selection
             const ramRadios = document.querySelectorAll('input[name="add_ram"]');
             ramRadios.forEach(radio => {
                 radio.addEventListener('change', () => {
                     document.getElementById('total').style.display = "block";
-                    document.getElementById('paypal-container-Y9QLL2967VV28').style.display = "block";
+                    document.getElementById('paypal-button-container').style.display = "block";
                 });
             });
         }
 
-        window.onload = function () {
-            initialize();
-            // PayPal Hosted Button Initialization
-            paypal.HostedButtons({
-                hostedButtonId: "Y9QLL2967VV28",
-            }).render("#paypal-container-Y9QLL2967VV28");
-        };
+        function redirectToPayPal() {
+            fetch('/create-paypal-transaction', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ amount: calculatedTotal.toFixed(2) })
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = data.forwardLink;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        window.onload = initialize;
     </script>
 </head>
 <body>
@@ -233,12 +233,10 @@
                 <input type="radio" name="add_ram" value="no"> No<br>
             </div>
 
-            <!-- The total price and PayPal button will be shown after the RAM selection -->
             <div id="total"></div>
 
-            <!-- PayPal Button Container -->
-            <div style="text-align:center;">
-                <div id="paypal-container-Y9QLL2967VV28"></div>
+            <div id="paypal-button-container">
+                <button type="button" onclick="redirectToPayPal()">Pay with PayPal</button>
             </div>
         </form>
     </div>
