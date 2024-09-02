@@ -80,7 +80,7 @@
             font-weight: bold;
             display: none; /* Initially hidden, will appear after RAM selection */
         }
-        #paypal-container-T7X56RD3LX9DW {
+        #paypal-container-VS34S726F8M7L {
             margin-top: 20px;
             display: none; /* Initially hidden, will appear after RAM selection */
         }
@@ -164,19 +164,9 @@
             ramRadios.forEach(radio => {
                 radio.addEventListener('change', () => {
                     document.getElementById('total').style.display = "block";
-                    document.getElementById('paypal-container-T7X56RD3LX9DW').style.display = "block";
+                    document.getElementById('paypal-container-VS34S726F8M7L').style.display = "block";
                 });
             });
-        }
-
-        function validatePrice() {
-            const enteredPrice = parseFloat(document.getElementById('entered-price').value);
-            if (enteredPrice === calculatedTotal) {
-                return true; // Price matches, allow form submission
-            } else {
-                window.location.href = "price-error.html"; // Redirect to error page
-                return false; // Prevent form submission
-            }
         }
 
         window.onload = initialize;
@@ -196,7 +186,7 @@
         <div style="text-align:center;">
             <img src="docs/assets/images/customize.jpeg" alt="Customize Your Nova" class="customize">
         </div>
-        <form id="purchase-form" action="https://formspree.io/f/xovabazk" method="POST" onsubmit="return validatePrice()">
+        <form id="purchase-form">
             <div class="form-group">
                 <label>Select NVME Size:</label>
                 <input type="radio" name="nvme" value="1TB" onclick="showNext('second_nvme', true)"> 1 TB<br>
@@ -239,15 +229,15 @@
 
             <!-- The total price and PayPal button will be shown after the RAM selection -->
             <div id="total"></div>
-            <div id="paypal-container-T7X56RD3LX9DW"></div>
+            <div id="paypal-container-VS34S726F8M7L"></div>
         </form>
     </div>
 
     <!-- PayPal Hosted Button Script -->
     <script>
         paypal.HostedButtons({
-            hostedButtonId: "T7X56RD3LX9DW",
-        }).render("#paypal-container-T7X56RD3LX9DW");
+            hostedButtonId: "VS34S726F8M7L",
+        }).render("#paypal-container-VS34S726F8M7L");
     </script>
 
 </body>
