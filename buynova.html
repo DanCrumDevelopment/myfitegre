@@ -88,13 +88,13 @@
     </style>
     <script src="https://www.paypal.com/sdk/js?client-id=AVEZ72PV_k55rxd4irSKlOiMggCXQhUzZkKJUPUzWYjVUVzVfV-vPu-3HUKcrEnBZetD0OO0kdMLdH_T&currency=USD"></script>
     <script>
-        const baseModelPrice = 1011.40; // Updated base model price
+        const baseModelPrice = 1011.40; // Base model price with 1TB NVMe included
 
         // SSD prices for both initial and second NVMe
         const ssdPrices = {
-            "1TB": 56.99,  // Price for adding a second 1TB NVMe
-            "2TB": 112.99, // Price for a 2TB NVMe
-            "4TB": 229.99  // Price for a 4TB NVMe
+            "1TB": 0,      // No additional cost for 1TB, already included in the base model
+            "2TB": 112.99, // Full price for upgrading to 2TB
+            "4TB": 229.99  // Full price for upgrading to 4TB
         };
 
         const additionalRamPrice = 109.99; // Price for extra 16GB RAM
@@ -117,17 +117,14 @@
         let calculatedTotal = 0;
 
         function calculateTotal() {
-            let total = baseModelPrice; // Start with the baseline price, which includes 1TB NVMe SSD
+            let total = baseModelPrice; // Start with the baseline price
 
             const nvmeSize = document.querySelector('input[name="nvme"]:checked')?.value;
-            if (nvmeSize === "2TB" || nvmeSize === "4TB") { 
-                // Add the difference in cost between the selected NVMe and the baseline 1TB
-                total += (ssdPrices[nvmeSize] - ssdPrices["1TB"]);
-            }
+            total += ssdPrices[nvmeSize]; // Add cost for SSD upgrade only
 
             if (document.querySelector('input[name="add_second_nvme"]:checked')?.value === "yes") {
                 const secondNvmeSize = document.querySelector('input[name="second_nvme"]:checked').value;
-                total += ssdPrices[secondNvmeSize]; // Add cost for the second NVMe SSD
+                total += ssdPrices[secondNvmeSize]; // Add cost for second NVMe SSD
             }
 
             if (document.querySelector('input[name="add_ram"]:checked')?.value === "yes") {
@@ -139,7 +136,7 @@
                 total += gpuPrices[gpu];
             }
 
-            const totalBeforeTax = total; // This should be the subtotal before tax and fees
+            const totalBeforeTax = total;
             total += totalBeforeTax * salesTaxRate; // Apply tax
             total += fees.lamination + fees.thermalPaste + fees.delivery + fees.labor; // Add fees
 
