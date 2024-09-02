@@ -65,8 +65,13 @@
         }
     </style>
     <script>
-        function showNext(id) {
-            document.getElementById(id).classList.remove('hidden');
+        function showNext(id, condition) {
+            const element = document.getElementById(id);
+            if (condition) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
         }
 
         function calculateTotal() {
@@ -118,36 +123,36 @@
         <form>
             <div class="form-group">
                 <label>Select NVME Size:</label>
-                <input type="radio" name="nvme" value="0" onclick="showNext('second_nvme')"> 1 TB<br>
-                <input type="radio" name="nvme" value="100" onclick="showNext('second_nvme')"> 2 TB<br>
-                <input type="radio" name="nvme" value="200" onclick="showNext('second_nvme')"> 4 TB<br>
+                <input type="radio" name="nvme" value="0" onclick="showNext('second_nvme', true)"> 1 TB<br>
+                <input type="radio" name="nvme" value="100" onclick="showNext('second_nvme', true)"> 2 TB<br>
+                <input type="radio" name="nvme" value="200" onclick="showNext('second_nvme', true)"> 4 TB<br>
             </div>
 
             <div id="second_nvme" class="form-group hidden">
                 <label>Add another NVME?</label>
-                <input type="radio" name="add_second_nvme" value="yes" onclick="showNext('second_nvme_options')"> Yes<br>
-                <input type="radio" name="add_second_nvme" value="no" onclick="showNext('gpu')"> No<br>
+                <input type="radio" name="add_second_nvme" value="yes" onclick="showNext('second_nvme_options', true)"> Yes<br>
+                <input type="radio" name="add_second_nvme" value="no" onclick="showNext('second_nvme_options', false); showNext('gpu', true)"> No<br>
             </div>
 
             <div id="second_nvme_options" class="form-group hidden">
                 <label>Select second NVME Size:</label>
-                <input type="radio" name="second_nvme" value="0" onclick="showNext('gpu')"> 1 TB<br>
-                <input type="radio" name="second_nvme" value="100" onclick="showNext('gpu')"> 2 TB<br>
-                <input type="radio" name="second_nvme" value="200" onclick="showNext('gpu')"> 4 TB<br>
+                <input type="radio" name="second_nvme" value="0" onclick="showNext('gpu', true)"> 1 TB<br>
+                <input type="radio" name="second_nvme" value="100" onclick="showNext('gpu', true)"> 2 TB<br>
+                <input type="radio" name="second_nvme" value="200" onclick="showNext('gpu', true)"> 4 TB<br>
             </div>
 
             <div id="gpu" class="form-group hidden">
                 <label>Add Graphics Card?</label>
-                <input type="radio" name="add_gpu" value="yes" onclick="showNext('gpu_options')"> Yes<br>
-                <input type="radio" name="add_gpu" value="no" onclick="showNext('ram')"> No<br>
+                <input type="radio" name="add_gpu" value="yes" onclick="showNext('gpu_options', true)"> Yes<br>
+                <input type="radio" name="add_gpu" value="no" onclick="showNext('gpu_options', false); showNext('ram', true)"> No<br>
             </div>
 
             <div id="gpu_options" class="form-group hidden">
                 <label>Select Graphics Card:</label>
-                <input type="radio" name="gpu" value="300" onclick="showNext('ram')"> 4060<br>
-                <input type="radio" name="gpu" value="500" onclick="showNext('ram')"> 4070<br>
-                <input type="radio" name="gpu" value="800" onclick="showNext('ram')"> 4080<br>
-                <input type="radio" name="gpu" value="1500" onclick="showNext('ram')"> 4090<br>
+                <input type="radio" name="gpu" value="300" onclick="showNext('ram', true)"> 4060<br>
+                <input type="radio" name="gpu" value="500" onclick="showNext('ram', true)"> 4070<br>
+                <input type="radio" name="gpu" value="800" onclick="showNext('ram', true)"> 4080<br>
+                <input type="radio" name="gpu" value="1500" onclick="showNext('ram', true)"> 4090<br>
             </div>
 
             <div id="ram" class="form-group hidden">
