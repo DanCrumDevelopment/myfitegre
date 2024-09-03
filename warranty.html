@@ -38,7 +38,7 @@
         }
         @media (min-width: 768px) {
             .content-columns {
-                flex-direction: row; /* Side by side on larger screens */
+                flex-direction: row;
             }
         }
         .column {
@@ -54,7 +54,7 @@
         }
         @media (min-width: 768px) {
             .column {
-                flex-basis: 30%; /* Adjust width on larger screens */
+                flex-basis: 30%;
             }
         }
         .column:hover {
@@ -84,24 +84,18 @@
         }
         /* Shorten descriptions on mobile devices */
         @media (max-width: 767px) {
-            td[data-part="CPU"]::before { content: "CPU"; }
-            td[data-part="Motherboard"]::before { content: "Motherboard"; }
-            td[data-part="Memory"]::before { content: "RAM"; }
-            td[data-part="Storage"]::before { content: "SSD"; }
-            td[data-part="Case"]::before { content: "Case"; }
-            td[data-part="Power Supply"]::before { content: "PSU"; }
-            td[data-part="CPU Cooler"]::before { content: "WATERCOOLER"; }
-            td[data-part="4060"]::before { content: "GPU 4060"; }
-            td[data-part="4070"]::before { content: "GPU 4070"; }
-            td[data-part="4080"]::before { content: "GPU 4080"; }
-            td[data-part="4090"]::before { content: "GPU 4090"; }
-            td::before {
-                content: "";
-                display: inline-block;
-                margin-right: 5px;
+            td[data-part]::before {
+                content: attr(data-part); /* Use the part name as the content */
+                display: block;
+                visibility: visible;
             }
             td[data-part] {
                 visibility: hidden;
+                height: 0;
+                padding: 0;
+            }
+            td {
+                visibility: visible;
             }
         }
     </style>
@@ -163,7 +157,7 @@
                     <th>Warranty</th>
                 </tr>
                 <tr>
-                    <td data-part="Storage">NVME (Crucial P3 1TB, 2TB, 4TB)</td>
+                    <td data-part="SSD">NVME (Crucial P3 1TB, 2TB, 4TB)</td>
                     <td>5 Years</td>
                 </tr>
                 <tr>
