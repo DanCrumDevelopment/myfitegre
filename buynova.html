@@ -90,11 +90,18 @@
     <script>
         const baseModelPrice = 1011.40; // This includes everything: SSD, tax, fees, delivery, etc.
 
-        // SSD prices for both initial and second NVMe
-        const ssdPrices = {
+        // SSD prices for initial NVMe
+        const initialSsdPrices = {
             "1TB": 0,      // No additional cost for 1TB, already included in the base model
             "2TB": 112.99, // Full price for upgrading to 2TB
             "4TB": 229.99  // Full price for upgrading to 4TB
+        };
+
+        // SSD prices for second NVMe
+        const secondSsdPrices = {
+            "1TB": 56.99,  // Cost for an additional 1TB SSD
+            "2TB": 112.99, // Full price for an additional 2TB SSD
+            "4TB": 229.99  // Full price for an additional 4TB SSD
         };
 
         const additionalRamPrice = 109.99; // Price for extra 16GB RAM
@@ -111,14 +118,16 @@
         function calculateTotal() {
             let total = baseModelPrice; // Start with the baseline price
 
+            // Handle initial NVMe SSD upgrade
             const nvmeSize = document.querySelector('input[name="nvme"]:checked')?.value;
             if (nvmeSize === "2TB" || nvmeSize === "4TB") { 
-                total += ssdPrices[nvmeSize]; // Add cost only for the upgrade
+                total += initialSsdPrices[nvmeSize]; // Add cost only for the upgrade
             }
 
+            // Handle second NVMe SSD
             if (document.querySelector('input[name="add_second_nvme"]:checked')?.value === "yes") {
                 const secondNvmeSize = document.querySelector('input[name="second_nvme"]:checked').value;
-                total += ssdPrices[secondNvmeSize]; // Add cost for the second NVMe SSD
+                total += secondSsdPrices[secondNvmeSize]; // Add cost for the second NVMe SSD
             }
 
             if (document.querySelector('input[name="add_ram"]:checked')?.value === "yes") {
