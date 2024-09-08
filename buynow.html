@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Now - Myfitegre Technologies LLC</title>
+    <link rel="icon" href="docs/assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 12px;
+            display: inline-block;
+            font-size: 14px;
+        }
+        .active {
+            background-color: #4CAF50;
+            border-radius: 4px;
+        }
+        .banner {
+            width: 100%;
+            max-height: 30%;
+            object-fit: cover;
+        }
+        .offerings {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .offering {
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+            width: 100%;
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+        .offering:hover {
+            transform: scale(1.05);
+        }
+        .offering img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            max-width: 200px;
+        }
+        .offering a {
+            text-decoration: none;
+            color: inherit;
+        }
+        @media (min-width: 768px) {
+            .offering {
+                width: 30%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="buynow.html" class="active">Buy Now</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="warranty.html">Warranty</a>
+    </nav>
+
+    <section class="offerings">
+        <div class="offering">
+            <a href="buynova.html">
+                <img src="docs/assets/images/nova.jpeg" alt="Nova PC">
+                <h3>Nova</h3>
+            </a>
+        </div>
+        <div class="offering">
+            <a href="buysiren.html">
+                <img src="docs/assets/images/siren.jpeg" alt="Siren PC">
+                <h3>Siren</h3>
+            </a>
+        </div>
+        <div class="offering">
+            <a href="buyapocalypse.html">
+                <img src="docs/assets/images/apocalypse.jpeg" alt="Apocalypse PC">
+                <h3>Apocalypse</h3>
+            </a>
+        </div>
+    </section>
+
+</body>
+</html>

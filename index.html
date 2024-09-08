@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myfitegre Technologies LLC - Home</title>
+    <link rel="icon" href="docs/assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 12px;
+            display: inline-block;
+            font-size: 14px;
+        }
+        .active {
+            background-color: #4CAF50;
+            border-radius: 4px;
+        }
+        .banner {
+            width: 100%;
+            max-height: 30%;
+            object-fit: cover;
+        }
+        .offerings {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .offering {
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+            width: 100%;
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+        .offering:hover {
+            transform: scale(1.05);
+        }
+        .offering img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            max-width: 200px;
+        }
+        .offering a {
+            text-decoration: none;
+            color: inherit;
+        }
+        @media (min-width: 768px) {
+            .offering {
+                width: 30%;
+            }
+        }
+        @keyframes flash {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .flashing-green {
+            color: green;
+            animation: flash 1s infinite;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        .rainbow-text {
+            font-size: 18px;
+            font-weight: bold;
+            background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            color: transparent;
+            padding: 20px;
+            margin: 20px auto;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            display: inline-block;
+        }
+        .small-black-text {
+            color: black;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #f4f4f4;
+            padding: 5px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .highlight-text {
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 20px;
+            margin: 20px auto;
+            border: 2px solid white; /* Changed border color to white */
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="buynow.html">Buy Now</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="warranty.html">Warranty</a>
+    </nav>
+
+    <img src="docs/assets/images/banner.jpeg" alt="Myfitegre Technologies LLC Banner" class="banner">
+    <div style="text-align:center;">
+        <img src="docs/assets/images/offerings.jpeg" alt="Our Offerings" style="max-width: 20%; height: auto; margin: 20px auto; padding: 20px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); border-radius: 8px;">
+    </div>
+    
+    <!-- Black text box for Click Images Below!!! with added styling -->
+    <div style="text-align:center;">
+        <div class="highlight-text">Click Images Below!!!</div>
+    </div>
+    
+    <section class="offerings">
+        <div class="offering">
+            <a href="novaclass.html">
+                <img src="docs/assets/images/nova.jpeg" alt="Nova PC">
+                <h3>Nova</h3>
+            </a>
+            <div style="text-align:center;">
+                <div class="flashing-green">$1,011.40</div>
+                <br>
+                <div class="rainbow-text">Available Now!</div>
+                <br>
+                <div class="small-black-text">Final Price - includes delivery & tax</div>
+            </div>
+        </div>
+        <div class="offering">
+            <a href="sirenclass.html">
+                <img src="docs/assets/images/siren.jpeg" alt="Siren PC">
+                <h3>Siren</h3>
+            </a>
+        </div>
+        <div class="offering">
+            <a href="apocalypseclass.html">
+                <img src="docs/assets/images/apocalypse.jpeg" alt="Apocalypse PC">
+                <h3>Apocalypse</h3>
+            </a>
+        </div>
+    </section>
+
+</body>
+</html>
