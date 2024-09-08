@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -144,3 +145,151 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apocalypse - Myfitegre Technologies LLC</title>
+    <link rel="icon" href="docs/assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 12px;
+            display: inline-block;
+            font-size: 14px;
+        }
+        .active {
+            background-color: #4CAF50;
+            border-radius: 4px;
+        }
+        .content {
+            text-align: center;
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+            background-color: white;
+            border-radius: 10px;
+        }
+        img {
+            max-width: 50%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .details {
+            background-color: #000;
+            color: #0f0;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            font-family: monospace;
+            text-align: center;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin-top: 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .simplified {
+            display: block;
+        }
+        .detailed {
+            display: none;
+        }
+    </style>
+    <script>
+        function toggleView() {
+            var detailed = document.getElementById("detailed");
+            var simplified = document.getElementById("simplified");
+            if (detailed.style.display === "none") {
+                detailed.style.display = "block";
+                simplified.style.display = "none";
+            } else {
+                detailed.style.display = "none";
+                simplified.style.display = "block";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="buynow.html">Buy Now</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="warranty.html">Warranty</a>
+    </nav>
+
+    <div class="content">
+        <img src="docs/assets/images/apocalypselogo.jpeg" alt="Apocalypse Logo"> 
+        <img src="docs/assets/images/apocalypse.jpeg" alt="Apocalypse PC">
+        <div id="simplified" class="details">
+            <p>CPU: 6 GHZ</p>
+            <p>CORES: 12</p>
+            <p>RAM SPEED: 8000 MT/s</p>
+            <p>NVME CAPACITY: 4TB</p>
+            <p>MAX NVME SPEED: 7.0 GBPS</p>
+            <p>WIFI: 7</p>
+            <p>USB: 11 Ports</p>
+        </div>
+        <div id="detailed" class="details detailed">
+            <p>Base Model:</p>
+            <p>Socket AM5 Ryzen 9 7950X 16 Cores and 32 processing threads</p>
+            <p>Zen 4 Architecture</p>
+            <p>5.5 GHz Base Clock</p>
+            <p>6.2 GHz Max Boost</p>
+            <p>G.Skill Trident Z5 Neo RGB 64 GB (2 x 32 GB) DDR5-8000 CL40 Memory</p>
+            <p>4TB M.2 2280 NVMe Internal SSD | PCIe 4.0 Gen 4x4 | Up to 7000 MB/s</p>
+            <p>1200 W 80+ Titanium Certified Fully Modular ATX Power Supply</p>
+            <p>12+2+1 Power Phase, Dr.MOS</p>
+            <p>4 x DDR5 DIMMs Supports Dual Channel, up to 8000+ (OC)</p>
+            <p>3 PCIe 4.0 x16</p>
+            <p>Graphics Output Options: HDMI, DisplayPort</p>
+            <p>Realtek ALC4080 7.1 CH HD Audio Codec, Nahimic Audio</p>
+            <p>6 SATA3, 4 Hyper M.2 (PCIe Gen4x4), 2 Ultra M.2 (PCIe Gen3 x4)</p>
+            <p>802.11be WiFi 7 + Bluetooth 5.3</p>
+            <p>Ports on Chassis:</p>
+            <p>One Type C Connector on control panel of chassis.</p>
+            <p>Four USB 3.0 plugs on control panel of chassis for your modern convenience</p>
+            <p>Headphone and Microphone Jack on front of chassis.</p>
+            <p>Ports on Motherboard:</p>
+            <p>2 USB 3.2 Gen2 Type-C Ports</p>
+            <p>6 USB 3.2 Gen2 Type-A Ports</p>
+            <p>2 USB 3.2 Gen1 Type-A Ports</p>
+            <p>Phantom Gaming 10G LAN</p>
+            <p>2 HDMI, 2 DisplayPort</p>
+            <p>Total USB Ports:</p>
+            <p>2 USB Type-C</p>
+            <p>9 USB Type-A</p>
+            <p>For a total of 11 USB Ports Available</p>
+        </div>
+        <button class="button" onclick="toggleView()">Mutate Description</button>
+    </div>
+
+</body>
+</html>
+>>>>>>> 844503100497f57b16e76776e1daca66a4bd4194
