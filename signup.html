@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Myfitegre</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <header>
+        <!-- Copy your existing header/nav here -->
+    </header>
+
+    <main>
+        <div class="signup-container">
+            <h2>Sign Up</h2>
+            <form action="/signup" method="POST">
+                <input type="text" name="first_name" placeholder="First Name" required>
+                <input type="text" name="middle_initial" placeholder="Middle Initial" maxlength="1">
+                <input type="text" name="last_name" placeholder="Last Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="tel" name="phone_number" placeholder="Phone Number">
+                <input type="text" name="street_address" placeholder="Street Address" required>
+                <input type="text" name="city" placeholder="City" required>
+                <input type="text" name="state" placeholder="State" required>
+                <input type="text" name="zip_code" placeholder="ZIP Code" required>
+                <input type="text" name="country" placeholder="Country" required>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Copy your existing footer here -->
+    </footer>
+</body>
+</html>
