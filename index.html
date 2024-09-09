@@ -14,8 +14,18 @@
         nav {
             background-color: #333;
             padding: 10px;
-            text-align: center;
-            white-space: nowrap;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
         }
         nav a {
             color: white;
@@ -138,8 +148,8 @@
 <body>
 
     <nav>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
+        <div class="nav-container">
+            <div class="main-nav">
                 <a href="index.html" class="active">Home</a>
                 <a href="buynow.html">Buy Now</a>
                 <a href="about.html">About</a>
