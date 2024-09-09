@@ -14,9 +14,21 @@
         }
         nav {
             background-color: #333;
-            padding: 10px;
-            text-align: center;
-            white-space: nowrap;
+            padding: 10px 0;
+            position: relative;
+        }
+        .nav-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
         }
         nav a {
             color: white;
@@ -29,6 +41,24 @@
         .active {
             background-color: #4CAF50;
             border-radius: 4px;
+        }
+        .user-section {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            right: 20px;
+        }
+        .profile-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin-right: 10px;
+        }
+        .signup-link {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
         }
         .content-block {
             text-align: center;
@@ -59,11 +89,19 @@
 <body>
 
     <nav>
-        <a href="index.html">Home</a>
-        <a href="buynow.html">Buy Now</a>
-        <a href="about.html" class="active">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="warranty.html">Warranty</a>
+        <div class="nav-wrapper">
+            <div class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="buynow.html">Buy Now</a>
+                <a href="about.html" class="active">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="warranty.html">Warranty</a>
+            </div>
+            <div class="user-section">
+                <div class="profile-circle"></div>
+                <a href="signup.html" class="signup-link">Sign Up</a>
+            </div>
+        </div>
     </nav>
 
     <div class="content-block">
