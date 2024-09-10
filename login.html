@@ -6,13 +6,31 @@
     <title>Myfitegre Technologies LLC - Login</title>
     <link rel="icon" href="docs/assets/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add any additional styles specific to login page here */
+    </style>
 </head>
 <body>
-    {% include 'nav.html' %}
+    <nav>
+        <div class="nav-wrapper">
+            <div class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="buynow.html">Buy Now</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="warranty.html">Warranty</a>
+            </div>
+            <div class="user-section">
+                <div class="profile-circle"></div>
+                <a href="login.html" class="active">Login</a>
+            </div>
+        </div>
+    </nav>
+
     <main>
         <div class="login-container">
-            <h2>Login</h2>
-            <form action="{{ url_for('login') }}" method="POST">
+            <h2 class="login-title">Login</h2>
+            <form class="login-form" action="login.html" method="POST">
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <button type="submit">Login</button>
@@ -20,8 +38,12 @@
             {% if error %}
                 <p class="error">{{ error }}</p>
             {% endif %}
-            <a href="{{ url_for('signup') }}">Don't have an account? Sign up</a>
+            <button class="signup-button" onclick="window.location.href='signup.html'">I don't have an account</button>
         </div>
     </main>
+
+    <script>
+        // Add any JavaScript specific to login page here
+    </script>
 </body>
 </html>
