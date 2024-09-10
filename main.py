@@ -19,6 +19,7 @@ from flask import Flask, request, render_template, redirect, url_for
 import os
 import psycopg2
 from psycopg2 import sql
+from werkzeug.security import generate_password_hash
 
 
 # Initialize Flask app with custom template folder
@@ -35,6 +36,7 @@ def signup():
         middle_initial = request.form['middle_initial']
         last_name = request.form['last_name']
         email = request.form['email']
+        password = request.form['password']  # New line to get password
         phone_number = request.form['phone_number']
         street_address = request.form['street_address']
         city = request.form['city']
@@ -42,14 +44,17 @@ def signup():
         zip_code = request.form['zip_code']
         country = request.form['country']
 
+        # Hash the password
+        hashed_password = generate_password_hash(password)
+
         # Insert data into database
         try:
             conn = psycopg2.connect(os.environ['DATABASE_URL'])
             cur = conn.cursor()
             cur.execute("""
-                INSERT INTO users (first_name, middle_initial, last_name, email, phone_number, street_address, city, state, zip_code, country)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """, (first_name, middle_initial, last_name, email, phone_number, street_address, city, state, zip_code, country))
+                INSERT INTO users (first_name, middle_initial, last_name, email, password, phone_number, street_address, city, state, zip_code, country)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """, (first_name, middle_initial, last_name, email, hashed_password, phone_number, street_address, city, state, zip_code, country))
             conn.commit()
             cur.close()
             conn.close()
