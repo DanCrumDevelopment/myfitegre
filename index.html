@@ -5,26 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Myfitegre Technologies LLC - Home</title>
     <link rel="icon" href="docs/assets/images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+        }
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .main-nav a, .user-section a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        .main-nav a:hover, .user-section a:hover {
+            text-decoration: underline;
+        }
+        .user-section {
+            display: flex;
+            align-items: center;
+        }
+        .profile-circle {
+            width: 30px;
+            height: 30px;
+            background-color: #ddd;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .banner {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+        }
+        .offerings {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .offering {
+            text-align: center;
+            margin: 10px;
+        }
+        .offering img {
+            max-width: 200px;
+            height: auto;
+        }
+        .highlight-text {
+            background-color: black;
+            color: white;
+            padding: 10px;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        .flashing-green {
+            color: green;
+            animation: flash 1s infinite;
+        }
+        .rainbow-text {
+            background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .small-black-text {
+            font-size: 0.8em;
+            color: black;
+        }
+        @keyframes flash {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-
     <nav>
         <div class="nav-wrapper">
             <div class="main-nav">
-                <a href="{{ url_for('index') }}" class="active">Home</a>
-                <a href="{{ url_for('buynow') }}">Buy Now</a>
-                <a href="{{ url_for('about') }}">About</a>
-                <a href="{{ url_for('contact') }}">Contact</a>
-                <a href="{{ url_for('warranty') }}">Warranty</a>
+                <a href="index.html" class="active">Home</a>
+                <a href="buynow.html">Buy Now</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="warranty.html">Warranty</a>
             </div>
             <div class="user-section">
                 <div class="profile-circle"></div>
-                {% if user %}
-                    <a href="{{ url_for('profile') }}">Profile</a>
-                {% else %}
-                    <a href="{{ url_for('login') }}">Login</a>
-                {% endif %}
+                <a href="login.html">Login</a>
             </div>
         </div>
     </nav>
