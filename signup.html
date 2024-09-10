@@ -7,6 +7,11 @@
     <link rel="icon" href="docs/assets/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="signup.css">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
         nav {
             background-color: #333;
             padding: 10px 0;
@@ -18,18 +23,25 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
         }
         .main-nav {
             display: flex;
+            justify-content: center;
+            flex-grow: 1;
         }
         nav a {
             color: white;
             text-decoration: none;
-            margin-right: 20px;
+            margin: 0 10px;
+            padding: 5px 10px;
+            border-radius: 4px;
         }
         .user-section {
             display: flex;
             align-items: center;
+            position: absolute;
+            right: 20px;
         }
         .profile-circle {
             width: 30px;
@@ -43,7 +55,7 @@
             text-decoration: none;
         }
         .active {
-            font-weight: bold;
+            background-color: #4CAF50;
         }
     </style>
 </head>
