@@ -15,15 +15,23 @@ Step 4: To try out cursor on your own projects, go to the file menu (top left) a
 '''
 
 
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, flash, session
 import os
 import psycopg2
 from psycopg2 import sql
-from werkzeug.security import generate_password_hash
-
+from werkzeug.security import generate_password_hash, check_password_hash
+import base64
 
 # Initialize Flask app with custom template folder
 app = Flask(__name__, template_folder=os.path.abspath('.'))
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max-limit
+app.secret_key = os.urandom(24)  # Set a secret key for session management
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # Ensure your templates are in a folder named 'templates' in the same directory as this file
 
@@ -44,6 +52,14 @@ def signup():
         zip_code = request.form['zip_code']
         country = request.form['country']
 
+        # Handle file upload
+        profile_photo = request.files['profile_photo']
+        if profile_photo:
+            # Read the file and encode it
+            profile_photo_data = base64.b64encode(profile_photo.read())
+        else:
+            profile_photo_data = None
+
         # Hash the password
         hashed_password = generate_password_hash(password)
 
@@ -52,9 +68,9 @@ def signup():
             conn = psycopg2.connect(os.environ['DATABASE_URL'])
             cur = conn.cursor()
             cur.execute("""
-                INSERT INTO users (first_name, middle_initial, last_name, email, password, phone_number, street_address, city, state, zip_code, country)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """, (first_name, middle_initial, last_name, email, hashed_password, phone_number, street_address, city, state, zip_code, country))
+                INSERT INTO users (first_name, middle_initial, last_name, email, password, phone_number, street_address, city, state, zip_code, country, profile_photo)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """, (first_name, middle_initial, last_name, email, hashed_password, phone_number, street_address, city, state, zip_code, country, profile_photo_data))
             conn.commit()
             cur.close()
             conn.close()
@@ -65,6 +81,53 @@ def signup():
 
     # If it's a GET request, just render the signup form
     return render_template('signup.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        try:
+            conn = psycopg2.connect(os.environ['DATABASE_URL'])
+            cur = conn.cursor()
+            cur.execute("SELECT id, email, password FROM users WHERE email = %s", (email,))
+            user = cur.fetchone()
+            cur.close()
+            conn.close()
+
+            if user and check_password_hash(user[2], password):
+                session['user_id'] = user[0]
+                session['email'] = user[1]
+                flash('Logged in successfully!', 'success')
+                return redirect(url_for('index'))
+            else:
+                flash('Invalid email or password', 'error')
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            flash('An error occurred while processing your login. Please try again.', 'error')
+
+    return render_template('login.html')
+
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    session.pop('email', None)
+    flash('Logged out successfully!', 'success')
+    return redirect(url_for('index'))
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+# Add this function to make the user available to all templates
+@app.context_processor
+def inject_user():
+    return dict(user=session.get('email'))
 
 
 if __name__ == '__main__':

@@ -5,164 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Myfitegre Technologies LLC - Home</title>
     <link rel="icon" href="docs/assets/images/favicon.ico" type="image/x-icon">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        nav {
-            background-color: #333;
-            padding: 10px 0;
-            position: relative;
-        }
-        .nav-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        .main-nav {
-            display: flex;
-            justify-content: center;
-            flex-grow: 1;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-            padding: 8px 12px;
-            display: inline-block;
-            font-size: 14px;
-        }
-        .active {
-            background-color: #4CAF50;
-            border-radius: 4px;
-        }
-        .banner {
-            width: 100%;
-            max-height: 30%;
-            object-fit: cover;
-        }
-        .offerings {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .offering {
-            text-align: center;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            margin: 10px;
-            border-radius: 8px;
-            transition: transform 0.3s;
-            width: 100%;
-            max-width: 300px;
-            box-sizing: border-box;
-        }
-        .offering:hover {
-            transform: scale(1.05);
-        }
-        .offering img {
-            width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-            max-width: 200px;
-        }
-        .offering a {
-            text-decoration: none;
-            color: inherit;
-        }
-        @media (min-width: 768px) {
-            .offering {
-                width: 30%;
-            }
-        }
-        @keyframes flash {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        .flashing-green {
-            color: green;
-            animation: flash 1s infinite;
-            font-weight: bold;
-            font-size: 24px;
-        }
-        .rainbow-text {
-            font-size: 18px;
-            font-weight: bold;
-            background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            padding: 20px;
-            margin: 20px auto;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            display: inline-block;
-        }
-        .small-black-text {
-            color: black;
-            font-size: 14px;
-            font-weight: bold;
-            background-color: #f4f4f4;
-            padding: 5px;
-            border-radius: 4px;
-            display: inline-block;
-        }
-        .highlight-text {
-            color: black;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 20px;
-            margin: 20px auto;
-            border: 2px solid white; /* Changed border color to white */
-            border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            background-color: #fff;
-            display: inline-block;
-        }
-        .user-section {
-            display: flex;
-            align-items: center;
-            position: absolute; /* Add this line */
-            right: 20px; /* Add this line */
-        }
-
-        .profile-circle {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: #ccc;
-            margin-right: 10px;
-        }
-
-        .signup-link {
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
 
     <nav>
         <div class="nav-wrapper">
             <div class="main-nav">
-                <a href="index.html" class="active">Home</a>
-                <a href="buynow.html">Buy Now</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-                <a href="warranty.html">Warranty</a>
+                <a href="{{ url_for('index') }}" class="active">Home</a>
+                <a href="{{ url_for('buynow') }}">Buy Now</a>
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+                <a href="{{ url_for('warranty') }}">Warranty</a>
             </div>
             <div class="user-section">
                 <div class="profile-circle"></div>
-                <a href="signup.html" class="signup-link">Login</a>
+                {% if user %}
+                    <a href="{{ url_for('profile') }}">Profile</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">Login</a>
+                {% endif %}
             </div>
         </div>
     </nav>

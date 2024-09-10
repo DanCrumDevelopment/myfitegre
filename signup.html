@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Myfitegre Technologies LLC - Sign Up</title>
     <link rel="icon" href="docs/assets/images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -113,21 +113,28 @@
             flex: 1;
             margin-right: 10px;
         }
+        .file-upload {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <nav>
         <div class="nav-wrapper">
             <div class="main-nav">
-                <a href="index.html">Home</a>
-                <a href="buynow.html">Buy Now</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-                <a href="warranty.html">Warranty</a>
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('buynow') }}">Buy Now</a>
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+                <a href="{{ url_for('warranty') }}">Warranty</a>
             </div>
             <div class="user-section">
                 <div class="profile-circle"></div>
-                <a href="signup.html" class="signup-link active">Login</a>
+                {% if user %}
+                    <a href="{{ url_for('profile') }}">Profile</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="active">Login</a>
+                {% endif %}
             </div>
         </div>
     </nav>
@@ -135,14 +142,14 @@
     <main>
         <div class="signup-container">
             <h2 class="signup-title">Sign Up</h2>
-            <form class="signup-form" action="/signup" method="POST" onsubmit="return validateForm()">
+            <form class="signup-form" action="{{ url_for('signup') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                 <input type="text" name="first_name" placeholder="First Name" required>
                 <input type="text" name="middle_initial" placeholder="Middle Initial" maxlength="1">
                 <input type="text" name="last_name" placeholder="Last Name" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <div class="password-container">
                     <input type="password" name="password" id="password" placeholder="Password" required>
-                    <span id="passwordError" class="error-message">PW must be at least 9 characters long and contain both letters and numbers.</span>
+                    <span id="passwordError" class="error-message">Password must be at least 9 characters long and contain both letters and numbers.</span>
                 </div>
                 <input type="tel" name="phone_number" placeholder="Phone Number">
                 <input type="text" name="street_address" placeholder="Street Address" required>
@@ -150,9 +157,13 @@
                 <input type="text" name="state" placeholder="State" required>
                 <input type="text" name="zip_code" placeholder="ZIP Code" required>
                 <input type="text" name="country" placeholder="Country" required>
+                <div class="file-upload">
+                    <label for="profile_photo">Profile Photo:</label>
+                    <input type="file" id="profile_photo" name="profile_photo" accept="image/jpeg,image/png,image/gif">
+                </div>
                 <button type="submit">Sign Up</button>
             </form>
-            <button class="login-button" onclick="window.location.href='login.html'">I already have an account</button>
+            <button class="login-button" onclick="window.location.href='{{ url_for('login') }}'">I already have an account</button>
         </div>
     </main>
 
