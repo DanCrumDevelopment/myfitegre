@@ -7,9 +7,16 @@
     <link rel="icon" href="docs/assets/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Page-specific styles for index.html */
+        .banner-container {
+            width: 100%;
+            max-height: 400px;
+            overflow: hidden;
+            margin-top: 60px; /* Adjust this value based on your nav height */
+        }
         .banner {
             width: 100%;
-            max-height: 300px;
+            height: auto;
             object-fit: cover;
             margin: 20px 0;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -74,9 +81,11 @@
             </div>
         </div>
     </nav>
-<div></div>
-<br><br>
-    <img src="docs/assets/images/banner.jpeg" alt="Myfitegre Technologies LLC Banner" class="banner">
+
+    <div class="banner-container">
+        <img src="docs/assets/images/banner.jpeg" alt="Myfitegre Technologies LLC Banner" class="banner">
+    </div>
+
     <div style="text-align:center;">
         <img src="docs/assets/images/offerings.jpeg" alt="Our Offerings" style="max-width: 20%; height: auto; margin: 20px auto; padding: 20px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); border-radius: 8px;">
     </div>
