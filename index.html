@@ -68,6 +68,25 @@
             50% { opacity: 0; }
             100% { opacity: 1; }
         }
+        
+        .welcome-blurb {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 80%;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 3px solid white;
+            font-size: 18px;
+            line-height: 1.6;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .welcome-blurb:hover {
+            transform: translateY(-5px);
+        }
     </style>
 </head>
 <body>
@@ -86,7 +105,12 @@
             </div>
         </div>
     </nav>
-    <img src="docs/assets/images/banner.jpeg" alt="Myfitegre Technologies LLC Banner" class="banner">
+    <div class="banner-container">
+        <img src="docs/assets/images/banner.jpeg" alt="Myfitegre Technologies LLC Banner" class="banner">
+    </div>
+    <div class="welcome-blurb">
+        <p>Welcome. We have devised three builds. First is our budget build that packs a serious punch out the box on the AMD AM4 platform called the Nova. We are also introducing our Siren build and the Apocalypse (both on the AMD AM5 platform).</p>
+    </div>
     <div style="text-align:center;">
         <img src="docs/assets/images/offerings.jpeg" alt="Our Offerings" style="max-width: 20%; height: auto; margin: 20px auto; padding: 20px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); border-radius: 8px;">
     </div>
