@@ -5,30 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Siren - Myfitegre Technologies LLC</title> 
     <link rel="icon" href="docs/assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        nav {
-            background-color: #333;
-            padding: 10px;
-            text-align: center;
-            white-space: nowrap;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-            padding: 8px 12px;
-            display: inline-block;
-            font-size: 14px;
-        }
-        .active {
-            background-color: #4CAF50;
-            border-radius: 4px;
-        }
         .content {
             text-align: center;
             padding: 20px;
@@ -87,15 +65,21 @@
     </script>
 </head>
 <body>
-
-    <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="buynow.html">Buy Now</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="warranty.html">Warranty</a>
-    </nav>
-
+<nav></nav>
+    <div class="nav-wrapper">
+        <div class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="buynow.html" class="active">Buy Now</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="warranty.html">Warranty</a>
+        </div>
+        <div class="user-section">
+            <div class="profile-circle"></div>
+            <a href="login.html" class="login-link">Login</a>
+        </div>
+    </div>
+</nav>
     <div class="content">
         <img src="docs/assets/images/sirenlogo.jpeg" alt="Siren Logo"> 
         <img src="docs/assets/images/siren.jpeg" alt="Siren PC">
