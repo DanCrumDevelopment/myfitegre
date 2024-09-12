@@ -7,25 +7,76 @@
     <link rel="icon" href="docs/assets/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Add any additional styles specific to login page here */
+       body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+            position: relative;
+        }
+        .nav-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 12px;
+            display: inline-block;
+            font-size: 14px;
+        }
+        .active {
+            background-color: #4CAF50;
+            border-radius: 4px;
+        }
+        .user-section {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            right: 20px;
+        }
+        .profile-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin-right: 10px;
+        }
+        .login-link {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-wrapper">
-            <div class="main-nav">
-                <a href="index.html">Home</a>
-                <a href="buynow.html">Buy Now</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-                <a href="warranty.html">Warranty</a>
-            </div>
-            <div class="user-section">
-                <div class="profile-circle"></div>
-                <a href="login.html" class="active">Login</a>
-            </div>
+    <div class="nav-wrapper">
+        <div class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="buynow.html" class="active">Buy Now</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="warranty.html">Warranty</a>
         </div>
-    </nav>
+        <div class="user-section">
+            <div class="profile-circle"></div>
+            <a href="signup.html" class="login-link">Login</a>
+        </div>
+    </div>
 
     <main>
         <div class="login-container">

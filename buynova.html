@@ -10,13 +10,25 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            text-align: center;
+            background-color: #f4f4f4;
         }
         nav {
             background-color: #333;
-            padding: 10px;
-            text-align: center;
-            white-space: nowrap;
+            padding: 10px 0;
+            position: relative;
+        }
+        .nav-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
         }
         nav a {
             color: white;
@@ -29,6 +41,24 @@
         .active {
             background-color: #4CAF50;
             border-radius: 4px;
+        }
+        .user-section {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            right: 20px;
+        }
+        .profile-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin-right: 10px;
+        }
+        .login-link {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
         }
         .content {
             text-align: center;
@@ -194,13 +224,19 @@
 </head>
 <body>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="buynow.html" class="active">Buy Now</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="warranty.html">Warranty</a>
-    </nav>
+    <div class="nav-wrapper">
+        <div class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="buynow.html" class="active">Buy Now</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="warranty.html">Warranty</a>
+        </div>
+        <div class="user-section">
+            <div class="profile-circle"></div>
+            <a href="signup.html" class="login-link">Login</a>
+        </div>
+    </div>
 
     <div class="content">
         <h2>Customize Your Nova</h2>
