@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, abort
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 import os
@@ -129,3 +129,13 @@ if __name__ == '__main__':
 @app.route('/test')
 def test():
     return "Flask is working!"
+
+# Dynamic route to serve any HTML file
+@app.route('/<page_name>')
+def serve_page(page_name):
+    if page_name.endswith('.html'):
+        page_name = page_name[:-5]  # Remove .html extension if present
+    if os.path.exists(f'templates/{page_name}.html'):
+        return render_template(f'{page_name}.html')
+    else:
+        abort(404)
