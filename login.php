@@ -1,3 +1,17 @@
+<?php
+// Start the session
+session_start();
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Here you would typically validate the login credentials
+    // For now, we'll just set a session variable
+    $_SESSION['user'] = $_POST['email'];
+    header("Location: index.php"); // Redirect to home page after login
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,52 +103,43 @@
     <nav>
         <div class="nav-wrapper">
             <div class="main-nav">
-                <a href="index.html">Home</a>
-                <a href="buynow.html">Buy Now</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-                <a href="warranty.html">Warranty</a>
+                <a href="index.php">Home</a>
+                <a href="buynow.php">Buy Now</a>
+                <a href="about.php">About</a>
+                <a href="contact.php">Contact</a>
+                <a href="warranty.php">Warranty</a>
             </div>
             <div class="user-section">
                 <div class="profile-circle"></div>
-                <a href="login.html" class="active">Login</a>
+                <a href="login.php" class="active">Login</a>
             </div>
         </div>
     </nav>
 
     <div class="login-container">
         <h2 class="login-title">Login</h2>
-        <form class="login-form" action="{{ url_for('login') }}" method="POST">
+        <form class="login-form" action="login.php" method="POST">
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit" class="login-button">Login</button>
         </form>
-        <a href="signup.html" class="signup-link">Don't have an account? Sign up</a>
+        <a href="signup.php" class="signup-link">Don't have an account? Sign up</a>
     </div>
 
-    <div id="loginPopup" class="popup">
-        <div class="popup-content">Login Failed!</div>
-        <button class="popup-button" onclick="closePopup()">OK</button>
-    </div>
+    <?php
+    // Display error message if login failed
+    if (isset($_GET['error'])) {
+        echo '<div id="loginPopup" class="popup" style="display:block;">
+                <div class="popup-content">Login Failed!</div>
+                <button class="popup-button" onclick="closePopup()">OK</button>
+              </div>';
+    }
+    ?>
 
     <script>
-        function showPopup() {
-            document.getElementById('loginPopup').style.display = 'block';
-        }
-
         function closePopup() {
             document.getElementById('loginPopup').style.display = 'none';
         }
-
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    {% if category == 'error' %}
-                        showPopup();
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
     </script>
 </body>
 </html>

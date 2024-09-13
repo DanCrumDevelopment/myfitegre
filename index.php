@@ -1,13 +1,18 @@
+<?php
+// Start the session (if you're using sessions for login)
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Myfitegre Technologies LLC - Home</title>
-    <link rel="icon" href="docs/assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Page-specific styles for index.html */
+        /* Page-specific styles */
         .banner-container {
             width: 100%;
             overflow: hidden;
@@ -66,7 +71,6 @@
             50% { opacity: 0; }
             100% { opacity: 1; }
         }
-        
         .welcome-blurb {
             background-color: rgba(255, 255, 255, 0.9);
             color: #333;
@@ -81,7 +85,6 @@
             text-align: center;
             transition: transform 0.3s ease;
         }
-
         .welcome-blurb:hover {
             transform: translateY(-5px);
         }
@@ -91,15 +94,21 @@
     <nav>
         <div class="nav-wrapper">
             <div class="main-nav">
-                <a href="index.html" class="active">Home</a>
-                <a href="buynow.html">Buy Now</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-                <a href="warranty.html">Warranty</a>
+                <a href="index.php" class="active">Home</a>
+                <a href="buynow.php">Buy Now</a>
+                <a href="about.php">About</a>
+                <a href="contact.php">Contact</a>
+                <a href="warranty.php">Warranty</a>
             </div>
             <div class="user-section">
                 <div class="profile-circle"></div>
-                <a href="login.html" class="login-link">Login</a>
+                <?php
+                if (isset($_SESSION['user'])) {
+                    echo '<a href="logout.php">Logout</a>';
+                } else {
+                    echo '<a href="login.php">Login</a>';
+                }
+                ?>
             </div>
         </div>
     </nav>
@@ -113,14 +122,13 @@
         <img src="docs/assets/images/offerings.jpeg" alt="Our Offerings" style="max-width: 20%; height: auto; margin: 20px auto; padding: 20px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); border-radius: 8px;">
     </div>
     
-    <!-- Black text box for Click Images Below!!! with added styling -->
     <div style="text-align:center;">
         <div class="highlight-text">Click Images Below!!!</div>
     </div>
     
     <section class="offerings">
         <div class="offering">
-            <a href="novaclass.html">
+            <a href="novaclass.php">
                 <img src="docs/assets/images/nova.jpeg" alt="Nova PC">
                 <h3>Nova</h3>
             </a>
@@ -133,13 +141,13 @@
             </div>
         </div>
         <div class="offering">
-            <a href="sirenclass.html">
+            <a href="sirenclass.php">
                 <img src="docs/assets/images/siren.jpeg" alt="Siren PC">
                 <h3>Siren</h3>
             </a>
         </div>
         <div class="offering">
-            <a href="apocalypseclass.html">
+            <a href="apocalypseclass.php">
                 <img src="docs/assets/images/apocalypse.jpeg" alt="Apocalypse PC">
                 <h3>Apocalypse</h3>
             </a>
