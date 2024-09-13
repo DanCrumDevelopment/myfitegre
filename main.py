@@ -17,12 +17,14 @@ Step 4: To try out cursor on your own projects, go to the file menu (top left) a
 
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 import os
+import psycopg2
+import base64
 
 # Initialize Flask app with custom template folder
 app = Flask(__name__, template_folder=os.path.abspath('.'))
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("postgres://", "postgresql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://u422b150ccposr:pdc8a1d1e020d9bb53b0ba7e67746d34f66e92bd19228e0cf5861ad9c12401b2f@cd5gks8n4kb20g.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/df1oegq1p4if0j"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'your_secret_key_here'  # Change this to a random secret key
 
@@ -33,6 +35,16 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
+    first_name = db.Column(db.String(100))
+    middle_initial = db.Column(db.String(1))
+    last_name = db.Column(db.String(100))
+    phone_number = db.Column(db.String(20))
+    street_address = db.Column(db.String(255))
+    city = db.Column(db.String(100))
+    state = db.Column(db.String(100))
+    zip_code = db.Column(db.String(20))
+    country = db.Column(db.String(100))
+    profile_photo = db.Column(db.LargeBinary)
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
@@ -50,7 +62,7 @@ def signup():
         middle_initial = request.form['middle_initial']
         last_name = request.form['last_name']
         email = request.form['email']
-        password = request.form['password']  # New line to get password
+        password = request.form['password']
         phone_number = request.form['phone_number']
         street_address = request.form['street_address']
         city = request.form['city']
@@ -60,9 +72,8 @@ def signup():
 
         # Handle file upload
         profile_photo = request.files['profile_photo']
-        if profile_photo:
-            # Read the file and encode it
-            profile_photo_data = base64.b64encode(profile_photo.read())
+        if profile_photo and allowed_file(profile_photo.filename):
+            profile_photo_data = profile_photo.read()
         else:
             profile_photo_data = None
 
@@ -71,17 +82,25 @@ def signup():
 
         # Insert data into database
         try:
-            conn = psycopg2.connect(os.environ['DATABASE_URL'])
-            cur = conn.cursor()
-            cur.execute("""
-                INSERT INTO users (first_name, middle_initial, last_name, email, password, phone_number, street_address, city, state, zip_code, country, profile_photo)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """, (first_name, middle_initial, last_name, email, hashed_password, phone_number, street_address, city, state, zip_code, country, profile_photo_data))
-            conn.commit()
-            cur.close()
-            conn.close()
+            new_user = User(
+                first_name=first_name,
+                middle_initial=middle_initial,
+                last_name=last_name,
+                email=email,
+                password=hashed_password,
+                phone_number=phone_number,
+                street_address=street_address,
+                city=city,
+                state=state,
+                zip_code=zip_code,
+                country=country,
+                profile_photo=profile_photo_data
+            )
+            db.session.add(new_user)
+            db.session.commit()
             return "Thank you for signing up!"
         except Exception as e:
+            db.session.rollback()
             print(f"An error occurred: {e}")
             return "An error occurred while processing your signup. Please try again."
 
