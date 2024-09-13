@@ -89,17 +89,19 @@ def signup():
 # Route for login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    app.logger.info(f"Login route accessed with method: {request.method}")
     if request.method == 'POST':
+        app.logger.info("POST request received")
         email = request.form['email']
         password = request.form['password']
         user = User.query.filter_by(email=email).first()
-
         if user and check_password_hash(user.password, password):
             session['user_id'] = user.id
+            app.logger.info("Login successful, redirecting to index")
             return redirect(url_for('index'))
         else:
+            app.logger.info("Login failed")
             flash('Login Failed!', 'error')
-
     return render_template('login.html')
 
 # Route for logout
@@ -110,6 +112,7 @@ def logout():
 
 # Route for index page (after login)
 @app.route('/')
+@app.route('/index')
 def index():
     return render_template('index.html')
 

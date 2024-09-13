@@ -104,7 +104,7 @@
 
     <div class="login-container">
         <h2 class="login-title">Login</h2>
-        <form class="login-form" action="/login" method="POST">
+        <form class="login-form" action="{{ url_for('login') }}" method="POST">
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit" class="login-button">Login</button>
