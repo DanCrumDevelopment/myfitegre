@@ -124,3 +124,8 @@ def inject_user():
 # Run the app
 if __name__ == '__main__':
     app.run(debug=True)
+
+# Add a simple route to verify Flask is working
+@app.route('/test')
+def test():
+    return "Flask is working!"
