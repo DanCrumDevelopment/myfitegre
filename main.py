@@ -15,18 +15,24 @@ Step 4: To try out cursor on your own projects, go to the file menu (top left) a
 '''
 
 
-from flask import Flask, request, render_template, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import check_password_hash
 import os
-import psycopg2
-from psycopg2 import sql
-from werkzeug.security import generate_password_hash, check_password_hash
-import base64
 
 # Initialize Flask app with custom template folder
 app = Flask(__name__, template_folder=os.path.abspath('.'))
-app.config['UPLOAD_FOLDER'] = 'static/uploads'
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max-limit
-app.secret_key = os.urandom(24)  # Set a secret key for session management
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("postgres://", "postgresql://", 1)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'your_secret_key_here'  # Change this to a random secret key
+
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(255), nullable=False)
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
@@ -88,34 +94,18 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-
-        try:
-            conn = psycopg2.connect(os.environ['DATABASE_URL'])
-            cur = conn.cursor()
-            cur.execute("SELECT id, email, password FROM users WHERE email = %s", (email,))
-            user = cur.fetchone()
-            cur.close()
-            conn.close()
-
-            if user and check_password_hash(user[2], password):
-                session['user_id'] = user[0]
-                session['email'] = user[1]
-                flash('Logged in successfully!', 'success')
-                return redirect(url_for('index'))
-            else:
-                flash('Invalid email or password', 'error')
-        except Exception as e:
-            print(f"An error occurred: {e}")
-            flash('An error occurred while processing your login. Please try again.', 'error')
-
+        user = User.query.filter_by(email=email).first()
+        if user and check_password_hash(user.password, password):
+            session['user_id'] = user.id
+            return redirect(url_for('index'))
+        else:
+            flash('Login Failed!', 'error')
     return render_template('login.html')
 
 
 @app.route('/logout')
 def logout():
     session.pop('user_id', None)
-    session.pop('email', None)
-    flash('Logged out successfully!', 'success')
     return redirect(url_for('index'))
 
 

@@ -6,39 +6,135 @@
     <title>Myfitegre Technologies LLC - Login</title>
     <link rel="icon" href="docs/assets/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .login-title {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .login-button:hover {
+            background-color: #0056b3;
+        }
+        .signup-link {
+            margin-top: 20px;
+            display: block;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .signup-link:hover {
+            text-decoration: underline;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            margin-bottom: 15px;
+        }
+
+        .popup-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <nav>
         <div class="nav-wrapper">
             <div class="main-nav">
-            <a href="index.html">Home</a>
-            <a href="buynow.html" class="active">Buy Now</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-            <a href="warranty.html">Warranty</a>
-        </div>
-        <div class="user-section">
-            <div class="profile-circle"></div>
-            <a href="login.html" class="login-link">Login</a>
+                <a href="index.html">Home</a>
+                <a href="buynow.html">Buy Now</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="warranty.html">Warranty</a>
+            </div>
+            <div class="user-section">
+                <div class="profile-circle"></div>
+                <a href="login.html" class="active">Login</a>
+            </div>
         </div>
     </nav>
-    <main>
-        <div class="login-container">
-            <h2 class="login-title">Login</h2>
-            <form class="login-form" action="login.html" method="POST">
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-            </form>
-            {% if error %}
-                <p class="error">{{ error }}</p>
-            {% endif %}
-            <button class="signup-button" onclick="window.location.href='signup.html'">I don't have an account</button>
-        </div>
-    </main>
+
+    <div class="login-container">
+        <h2 class="login-title">Login</h2>
+        <form class="login-form" action="login.html" method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit" class="login-button">Login</button>
+        </form>
+        <a href="signup.html" class="signup-link">Don't have an account? Sign up</a>
+    </div>
+
+    <div id="loginPopup" class="popup">
+        <div class="popup-content">Login Failed!</div>
+        <button class="popup-button" onclick="closePopup()">OK</button>
+    </div>
 
     <script>
-        // Add any JavaScript specific to login page here
+        function showPopup() {
+            document.getElementById('loginPopup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('loginPopup').style.display = 'none';
+        }
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'error' %}
+                        showPopup();
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
     </script>
 </body>
 </html>
