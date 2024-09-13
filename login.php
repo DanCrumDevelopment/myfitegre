@@ -1,14 +1,43 @@
 <?php
-// Start the session
 session_start();
 
-// Check if the form is submitted
+// Database connection
+$host = "cd5gks8n4kb20g.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com";
+$database = "df1oegq1p4if0j";
+$user = "u422b150ccposr";
+$password = "pdc8a1d1e020d9bb53b0ba7e67746d34f66e92bd19228e0cf5861ad9c12401b2f";
+$port = "5432";
+
+$db = pg_connect("host=$host dbname=$database user=$user password=$password port=$port");
+
+if (!$db) {
+    die("Connection failed: " . pg_last_error());
+}
+
+$message = '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Here you would typically validate the login credentials
-    // For now, we'll just set a session variable
-    $_SESSION['user'] = $_POST['email'];
-    header("Location: index.php"); // Redirect to home page after login
-    exit();
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Query to check if the email exists and get the password
+    $query = "SELECT password FROM users WHERE email = $1";
+    $result = pg_query_params($db, $query, array($email));
+
+    if ($row = pg_fetch_assoc($result)) {
+        // Email exists, check password
+        if (password_verify($password, $row['password'])) {
+            $message = '<p style="color: red;">Success</p>';
+            // Here you would typically set session variables and redirect
+            // $_SESSION['user_id'] = $row['id'];
+            // header("Location: index.php");
+            // exit();
+        } else {
+            $message = '<p style="color: red;">Failure</p>';
+        }
+    } else {
+        $message = '<p style="color: red;">Failure</p>';
+    }
 }
 ?>
 
@@ -118,6 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="login-container">
         <h2 class="login-title">Login</h2>
+        <?php echo $message; // Display success or failure message ?>
         <form class="login-form" action="login.php" method="POST">
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
